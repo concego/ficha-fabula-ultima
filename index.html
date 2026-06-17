@@ -52,12 +52,16 @@
                     <input type="text" id="fName" placeholder="Ex: Valerius">
                 </div>
                 <div>
-                    <label for="fOrig">Origem:</label>
-                    <input type="text" id="fOrig" placeholder="Ex: Império de Galatea">
+                    <label for="fOrig">Identidade:</label>
+                    <input type="text" id="fOrig" placeholder="Ex: Cavaleiro Errante">
                 </div>
                 <div>
-                    <label for="fTrait">Traço:</label>
-                    <input type="text" id="fTrait" placeholder="Ex: Coração Valente">
+                    <label for="fTrait">Tema:</label>
+                    <input type="text" id="fTrait" placeholder="Ex: Justiça, Ambição...">
+                </div>
+                <div>
+                    <label for="fDesc">Descrição Física:</label>
+                    <input type="text" id="fDesc" placeholder="Ex: Alto, olhos azuis, capa vermelha">
                 </div>
                 <div>
                     <label for="fLvl">Nível:</label>
@@ -225,8 +229,9 @@
 FICHA DE PERSONAGEM - FÁBULA ÚLTIMA
 ------------------------------------
 NOME: ${n}
-ORIGEM: ${document.getElementById('fOrig').value}
-TRAÇO: ${document.getElementById('fTrait').value}
+IDENTIDADE: ${document.getElementById('fOrig').value}
+TEMA: ${document.getElementById('fTrait').value}
+DESCRIÇÃO: ${document.getElementById('fDesc').value}
 NÍVEL: ${document.getElementById('fLvl').value}
 
 ATRIBUTOS:
@@ -261,8 +266,9 @@ ${document.getElementById('fNotes').value}
     function exportJSON() {
         const data = {
             name: document.getElementById('fName').value,
-            orig: document.getElementById('fOrig').value,
-            trait: document.getElementById('fTrait').value,
+            ident: document.getElementById('fOrig').value,
+            theme: document.getElementById('fTrait').value,
+            desc: document.getElementById('fDesc').value,
             lvl: document.getElementById('fLvl').value,
             dex: document.getElementById('fDex').value,
             ins: document.getElementById('fIns').value,
@@ -286,8 +292,9 @@ ${document.getElementById('fNotes').value}
         reader.onload = (e) => {
             const d = JSON.parse(e.target.result);
             document.getElementById('fName').value = d.name || '';
-            document.getElementById('fOrig').value = d.orig || '';
-            document.getElementById('fTrait').value = d.trait || '';
+            document.getElementById('fOrig').value = d.ident || d.orig || '';
+            document.getElementById('fTrait').value = d.theme || d.trait || '';
+            document.getElementById('fDesc').value = d.desc || '';
             document.getElementById('fLvl').value = d.lvl || 5;
             document.getElementById('fDex').value = d.dex || 8;
             document.getElementById('fIns').value = d.ins || 8;
