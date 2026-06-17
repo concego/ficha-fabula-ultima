@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fabula Ultima - Ficha PRO (Export/Import)</title>
+    <style>
+        :root { --bg: #ffffff; --txt: #1a1a1a; --acc: #0056b3; --focus: #ffbf47; --border: #000000; }
+        body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: var(--txt); background: var(--bg); margin: 0; padding: 0; }
+        header { background: var(--border); color: #fff; padding: 20px; text-align: center; border-bottom: 5px solid var(--acc); }
+        nav { background: #f4f4f4; border-bottom: 3px solid var(--border); padding: 10px; position: sticky; top: 0; z-index: 100; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        nav a { padding: 12px 18px; background: #fff; border: 2px solid var(--border); color: var(--txt); text-decoration: none; font-weight: bold; }
+        nav a:hover, nav a:focus { background: var(--focus); outline: 3px solid var(--border); }
+        main { max-width: 900px; margin: 20px auto; padding: 0 20px; }
+        section { margin-bottom: 60px; border-top: 5px solid var(--border); padding-top: 30px; }
+        h2 { border-left: 12px solid var(--acc); padding-left: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .box { border: 3px solid var(--border); padding: 25px; margin-bottom: 30px; background: #fff; box-shadow: 6px 6px 0 var(--border); }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; }
+        label { font-weight: bold; display: block; margin-bottom: 8px; }
+        select, input, textarea { width: 100%; padding: 14px; font-size: 1.1rem; border: 3px solid var(--border); box-sizing: border-box; background: #fff; }
+        button { background: var(--border); color: #fff; border: none; padding: 15px; font-size: 1.1rem; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px; border: 3px solid var(--border); }
+        button:hover, button:focus { background: var(--acc); color: white; outline: 5px solid var(--focus); }
+        .btn-secondary { background: #555; }
+        .btn-success { background: #28a745; }
+        .card { border-bottom: 2px solid #eee; padding: 20px 0; }
+        .stat-preview { background: #f0f7ff; padding: 20px; border: 3px solid var(--acc); font-size: 1.3rem; margin-top: 15px; font-weight: bold; text-align: center; }
+        #loginOverlay { position: fixed; inset: 0; background: #fff; z-index: 3000; display: flex; align-items: center; justify-content: center; }
+        .login-box { border: 8px solid #000; padding: 60px; text-align: center; max-width: 500px; width: 90%; }
+        .skip-link { position: absolute; top: -40px; left: 0; background: var(--acc); color: white; padding: 8px; z-index: 2001; }
+        .skip-link:focus { top: 0; }
+    </style>
+</head>
+<body>
+    <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+
+    <div id="loginOverlay">
+        <div class="login-box">
+            <h1>FABULA ULTIMA PRO</h1>
+            <p>Compêndio Anderson & Adri v1.7</p>
+            <label for="pw">Senha:</label>
+            <input type="password" id="pw" placeholder="Digite aqui" onkeydown="if(event.key==='Enter')login()">
+            <button onclick="login()">ACESSAR</button>
+        </div>
+    </div>
+
+    <div id="app" style="display:none">
+        <header><h1>Fabula Ultima: Ficha PRO</h1></header>
+        <nav>
+            <a href="#ficha">📝 Ficha</a>
+            <a href="#classes">⚔️ Classes</a>
+            <a href="#regras">📖 Regras</a>
+        </nav>
+
+        <main id="conteudo">
+            <section id="ficha">
+                <h2>📝 Gerenciamento de Ficha</h2>
+                <div class="box">
+                    <div class="grid-2">
+                        <button class="btn-secondary" onclick="document.getElementById('importFile').click()">📥 Importar JSON</button>
+                        <button class="btn-success" onclick="exportJSON()">📤 Exportar JSON</button>
+                        <input type="file" id="importFile" style="display:none" accept=".json" onchange="importJSON(event)">
+                    </div>
+                </div>
+
+                <div class="box">
+                    <h3>Identidade</h3>
+                    <div class="grid-2">
+                        <div><label for="fName">Nome:</label><input type="text" id="fName"></div>
+                        <div><label for="fTrait">Traço:</label><input type="text" id="fTrait"></div>
+                    </div>
+                    <div class="grid-4" style="margin-top:15px">
+                        <div><label>DEX</label><select id="fDex" onchange="calc()"><option value="6">d6</option><option value="8" selected>d8</option><option value="10">d10</option><option value="12">d12</option></select></div>
+                        <div><label>INS</label><select id="fIns" onchange="calc()"><option value="6">d6</option><option value="8" selected>d8</option><option value="10">d10</option><option value="12">d12</option></select></div>
+                        <div><label>MIG</label><select id="fMig" onchange="calc()"><option value="6">d6</option><option value="8" selected>d8</option><option value="10">d10</option><option value="12">d12</option></select></div>
+                        <div><label>WLP</label><select id="fWlp" onchange="calc()"><option value="6">d6</option><option value="8" selected>d8</option><option value="10">d10</option><option value="12">d12</option></select></div>
+                    </div>
+                    <div class="grid-2" style="margin-top:15px">
+                        <div><label for="fLvl">Nível:</label><input type="number" id="fLvl" value="5" onchange="calc()"></div>
+                    </div>
+                    <div id="previewStats" class="stat-preview">
+                        PV: <span id="vPv">--</span> | PM: <span id="vPm">--</span> | DEF: <span id="vDef">--</span> | MDEF: <span id="vMdef">--</span>
+                    </div>
+                    <h3 style="margin-top:25px">Habilidades e Notas</h3>
+                    <textarea id="fClass" rows="5" placeholder="Classes e Habilidades..."></textarea>
+                    <textarea id="fNotes" rows="3" placeholder="Notas, Vínculos, Equipamentos..." style="margin-top:10px"></textarea>
+                    <button onclick="downloadHTML()">📄 Baixar Ficha HTML Acessível</button>
+                </div>
+            </section>
+
+            <section id="classes">
+                <h2>⚔️ Banco de Dados de Classes</h2>
+                <div id="classList"></div>
+            </section>
+
+            <section id="regras">
+                <h2>📖 Resumo de Regras</h2>
+                <div id="rulesList"></div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const DB = {
+            rules: [
+                {t:"Testes", d:"Atributo + Atributo + Bônus vs DL."},
+                {t:"Crítico", d:"Dados iguais e >= 6."},
+                {t:"Falha Crítica", d:"Dois dados '1'."}
+            ],
+            classes: [
+                {n:"Arcanista", s:"Invocação de Avatares"},
+                {n:"Mago Branco", s:"Cura e Suporte"},
+                {n:"Mago Negro", s:"Dano Elemental"},
+                {n:"Floralista", s:"Magia de Plantas"}
+            ]
+        };
+
+        function login(){
+            if(document.getElementById('pw').value.toLowerCase()==='gnomo'){
+                document.getElementById('loginOverlay').style.display='none';
+                document.getElementById('app').style.display='block';
+                init(); calc();
+            } else { alert("Senha incorreta"); }
+        }
+
+        function init(){
+            document.getElementById('classList').innerHTML = DB.classes.map(c => `
+                <div class="card"><strong>${c.n}</strong>: ${c.s}</div>`).join('');
+            document.getElementById('rulesList').innerHTML = DB.rules.map(r => `
+                <div class="card"><strong>${r.t}</strong>: ${r.d}</div>`).join('');
+        }
+
+        function calc(){
+            const lvl=parseInt(document.getElementById('fLvl').value)||0, mig=parseInt(document.getElementById('fMig').value), wlp=parseInt(document.getElementById('fWlp').value);
+            const hp=(mig*5)+lvl, mp=(wlp*5)+lvl;
+            document.getElementById('vPv').innerText = hp;
+            document.getElementById('vPm').innerText = mp;
+            document.getElementById('vDef').innerText = document.getElementById('fDex').value;
+            document.getElementById('vMdef').innerText = document.getElementById('fIns').value;
+        }
+
+        function exportJSON(){
+            const data = {
+                name: document.getElementById('fName').value,
+                trait: document.getElementById('fTrait').value,
+                dex: document.getElementById('fDex').value,
+                ins: document.getElementById('fIns').value,
+                mig: document.getElementById('fMig').value,
+                wlp: document.getElementById('fWlp').value,
+                lvl: document.getElementById('fLvl').value,
+                classInfo: document.getElementById('fClass').value,
+                notes: document.getElementById('fNotes').value
+            };
+            const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `Ficha_${data.name || 'Heroi'}.json`;
+            a.click();
+        }
+
+        function importJSON(event){
+            const file = event.target.files[0];
+            if(!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const data = JSON.parse(e.target.result);
+                document.getElementById('fName').value = data.name || '';
+                document.getElementById('fTrait').value = data.trait || '';
+                document.getElementById('fDex').value = data.dex || '8';
+                document.getElementById('fIns').value = data.ins || '8';
+                document.getElementById('fMig').value = data.mig || '8';
+                document.getElementById('fWlp').value = data.wlp || '8';
+                document.getElementById('fLvl').value = data.lvl || '5';
+                document.getElementById('fClass').value = data.classInfo || '';
+                document.getElementById('fNotes').value = data.notes || '';
+                calc();
+                alert("Ficha importada com sucesso!");
+            };
+            reader.readAsText(file);
+        }
+
+        function downloadHTML(){
+            const n = document.getElementById('fName').value || "Heroi";
+            const html = `<!DOCTYPE html><html lang="pt-BR"><body><h1>${n}</h1><p>PV: ${document.getElementById('vPv').innerText} | PM: ${document.getElementById('vPm').innerText}</p></body></html>`;
+            const blob = new Blob([html], {type: 'text/html'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `Ficha_${n}.html`;
+            a.click();
+        }
+    </script>
+</body>
+</html>
