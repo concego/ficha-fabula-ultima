@@ -3,342 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha Fábula Última - Edição Livre</title>
+    <title>FICHA FABULA ULTIMA - VERSÃO TXT</title>
     <style>
-        :root { 
-            --bg: #ffffff; 
-            --txt: #000000; 
-            --acc: #0056b3; 
-            --focus: #ffbf47; 
-            --border: #000000; 
-            --section-bg: #fdfdfd;
-        }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            line-height: 1.6; 
-            color: var(--txt); 
-            background: var(--bg); 
-            margin: 0; 
-            padding: 20px; 
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #fff;
+            color: #000;
+            padding: 20px;
             max-width: 800px;
             margin: auto;
+            line-height: 1.4;
         }
-        header { 
-            border-bottom: 5px solid var(--border); 
-            padding-bottom: 10px; 
-            margin-bottom: 25px; 
+        h1 {
             text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
         }
-        h1 { margin: 0; font-size: 1.8rem; text-transform: uppercase; }
-        
-        details { 
-            border: 3px solid var(--border); 
-            margin-bottom: 20px; 
-            background: var(--section-bg); 
+        details {
+            border: 1px solid #000;
+            margin-bottom: 15px;
         }
-        summary { 
-            padding: 15px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            background: #eeeeee; 
-            border-bottom: 2px solid var(--border); 
-            font-size: 1.2rem;
+        summary {
+            padding: 8px;
+            background: #000;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
             list-style: none;
-            display: flex;
-            align-items: center;
         }
         summary::-webkit-details-marker { display: none; }
-        summary::before {
-            content: '▶';
-            display: inline-block;
+        .content {
+            padding: 15px;
+        }
+        .field {
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+        }
+        label {
+            font-weight: bold;
             margin-right: 10px;
-            transition: transform 0.2s;
+            min-width: 180px;
         }
-        details[open] summary::before {
-            transform: rotate(90deg);
-        }
-        summary:focus { 
-            outline: 4px solid var(--focus); 
-            background: var(--focus); 
-        }
-        
-        .content { padding: 20px; }
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
-            gap: 20px; 
-        }
-        
-        label { 
-            font-weight: bold; 
-            display: block; 
-            margin-bottom: 8px; 
-            font-size: 1.1rem; 
-        }
-        input[type="text"], textarea { 
-            width: 100%; 
-            padding: 12px; 
-            border: 2px solid var(--border); 
-            font-size: 1.1rem; 
-            box-sizing: border-box; 
-            background: #ffffff; 
-            color: #000000; 
-            border-radius: 4px;
-        }
-        textarea { min-height: 120px; resize: vertical; }
-        input:focus, textarea:focus { 
-            outline: 4px solid var(--focus); 
-            border-color: var(--acc);
-        }
-        
-        .btn-group { 
-            display: flex; 
-            gap: 15px; 
-            margin-top: 30px; 
-            flex-wrap: wrap; 
-        }
-        button { 
-            flex: 1; 
-            padding: 15px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            border: 3px solid var(--border); 
+        input[type="text"], input[type="number"], textarea {
+            font-family: 'Courier New', Courier, monospace;
             font-size: 1rem;
-            background: #eeeeee;
-            transition: background 0.2s;
-            min-width: 150px;
+            border: 1px solid #000;
+            padding: 4px;
+            flex-grow: 1;
+            box-sizing: border-box;
         }
-        button:hover { background: #dddddd; }
-        button:focus { outline: 4px solid var(--focus); }
-        .btn-save { background: #333333; color: #ffffff; }
-        .btn-save:hover { background: #000000; }
-
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
+        textarea {
+            width: 100%;
+            min-height: 80px;
+            margin-top: 5px;
+            resize: vertical;
         }
-
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .actions {
+            margin-top: 40px;
+            border-top: 3px double #000;
+            padding-top: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            border: 2px solid #000;
+            background: #fff;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #000;
+            color: #fff;
+        }
         @media (max-width: 600px) {
-            body { padding: 10px; }
-            .grid { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            label { min-width: 100%; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Fábula Última - Edição Livre</h1>
-    <p>Preenchimento flexível (apenas texto) • Auto-salvamento ativado</p>
-</header>
+<h1>-- 📋 FICHA DE PERSONAGEM: FÁBULA ÚLTIMA (TXT STYLE) --</h1>
 
-<main>
-    <details open>
-        <summary aria-controls="sec-ident">1. Identidade e Atributos</summary>
-        <div id="sec-ident" class="content">
-            <div class="grid">
-                <div>
-                    <label for="fName">Nome do Personagem:</label>
-                    <input type="text" id="fName" oninput="save()" placeholder="Ex: Valerius" aria-label="Nome do Personagem">
-                </div>
-                <div>
-                    <label for="fIdent">Identidade:</label>
-                    <input type="text" id="fIdent" oninput="save()" placeholder="Ex: Cavaleiro das Rosas" aria-label="Identidade">
-                </div>
-                <div>
-                    <label for="fTheme">Tema:</label>
-                    <input type="text" id="fTheme" oninput="save()" placeholder="Ex: Justiça" aria-label="Tema">
-                </div>
-                <div>
-                    <label for="fOrigin">Origem:</label>
-                    <input type="text" id="fOrigin" oninput="save()" placeholder="Ex: Reinos de Ferro" aria-label="Origem">
-                </div>
-                <div>
-                    <label for="fLevel">Nível:</label>
-                    <input type="text" id="fLevel" oninput="save()" placeholder="Ex: 5" aria-label="Nível">
-                </div>
-            </div>
-            
-            <div class="grid" style="margin-top:20px">
-                <div>
-                    <label for="fDex">DEX (Destreza):</label>
-                    <input type="text" id="fDex" oninput="save()" placeholder="Ex: d8" aria-label="Destreza">
-                </div>
-                <div>
-                    <label for="fIns">INS (Intuição):</label>
-                    <input type="text" id="fIns" oninput="save()" placeholder="Ex: d10" aria-label="Intuição">
-                </div>
-                <div>
-                    <label for="fMig">MIG (Vigor):</label>
-                    <input type="text" id="fMig" oninput="save()" placeholder="Ex: d6" aria-label="Vigor">
-                </div>
-                <div>
-                    <label for="fWlp">WLP (Vontade):</label>
-                    <input type="text" id="fWlp" oninput="save()" placeholder="Ex: d8" aria-label="Vontade">
-                </div>
-            </div>
-
-            <div class="grid" style="margin-top:20px">
-                <div>
-                    <label for="fPV">Pontos de Vida (PV):</label>
-                    <input type="text" id="fPV" oninput="save()" placeholder="Atual / Máximo" aria-label="Pontos de Vida">
-                </div>
-                <div>
-                    <label for="fPM">Pontos de Mente (PM):</label>
-                    <input type="text" id="fPM" oninput="save()" placeholder="Atual / Máximo" aria-label="Pontos de Mente">
-                </div>
-                <div>
-                    <label for="fDef">Defesa:</label>
-                    <input type="text" id="fDef" oninput="save()" placeholder="Ex: 10" aria-label="Defesa">
-                </div>
-                <div>
-                    <label for="fMDef">Defesa Mágica:</label>
-                    <input type="text" id="fMDef" oninput="save()" placeholder="Ex: 8" aria-label="Defesa Mágica">
-                </div>
-            </div>
+<details open>
+    <summary>-- 01. INFORMAÇÕES DO PERSONAGEM --</summary>
+    <div class="content">
+        <div class="field">
+            <label for="fName">Nome do Personagem:</label>
+            <input type="text" id="fName" oninput="save()">
         </div>
-    </details>
-
-    <details>
-        <summary aria-controls="sec-classes">2. Classes e Habilidades</summary>
-        <div id="sec-classes" class="content">
-            <label for="fClasses">Descreva suas Classes e Níveis:</label>
-            <textarea id="fClasses" oninput="save()" placeholder="Ex: Elementalista 2, Ladino 3..." aria-label="Classes e Níveis"></textarea>
-            
-            <label for="fSkills" style="margin-top:15px">Habilidades de Classe:</label>
-            <textarea id="fSkills" oninput="save()" placeholder="Liste suas habilidades e descrições aqui..." aria-label="Habilidades de Classe"></textarea>
+        <div class="field">
+            <label for="fPlayer">Nome do Jogador:</label>
+            <input type="text" id="fPlayer" oninput="save()">
         </div>
-    </details>
-
-    <details>
-        <summary aria-controls="sec-equip">3. Inventário e Equipamento</summary>
-        <div id="sec-equip" class="content">
-            <textarea id="fEquip" oninput="save()" placeholder="Armas, Armaduras, Acessórios e Itens consumíveis..." aria-label="Inventário e Equipamento"></textarea>
+        <div class="field">
+            <label for="fIdent">Identidade:</label>
+            <input type="text" id="fIdent" oninput="save()">
         </div>
-    </details>
-
-    <details>
-        <summary aria-controls="sec-history">4. História e Notas</summary>
-        <div id="sec-history" class="content">
-            <label for="fHistory">História do Personagem:</label>
-            <textarea id="fHistory" oninput="save()" placeholder="Breve biografia..." aria-label="História"></textarea>
-            
-            <label for="fNotes" style="margin-top:15px">Notas de Campanha:</label>
-            <textarea id="fNotes" oninput="save()" placeholder="Lembretes, NPCs, missões..." aria-label="Notas"></textarea>
+        <div class="field">
+            <label for="fTheme">Tema:</label>
+            <input type="text" id="fTheme" oninput="save()">
         </div>
-    </details>
-
-    <div class="btn-group">
-        <button onclick="downloadJSON()" class="btn-save">📤 Baixar JSON</button>
-        <button onclick="document.getElementById('uploadFile').click()">📥 Carregar JSON</button>
-        <button onclick="downloadTXT()">📄 Baixar TXT</button>
-        <input type="file" id="uploadFile" style="display:none" onchange="uploadJSON(event)" accept=".json">
+        <div class="field">
+            <label for="fOrigin">Origem:</label>
+            <input type="text" id="fOrigin" oninput="save()">
+        </div>
+        <div class="field">
+            <label for="fLvl">Nível Total:</label>
+            <input type="number" id="fLvl" value="5" oninput="save()">
+        </div>
     </div>
-</main>
+</details>
+
+<details open>
+    <summary>-- 02. ATRIBUTOS E STATUS --</summary>
+    <div class="content">
+        <div class="grid-2">
+            <div class="field"><label>DEX:</label><input type="text" id="fDex" placeholder="d8" oninput="save()"></div>
+            <div class="field"><label>INS:</label><input type="text" id="fIns" placeholder="d8" oninput="save()"></div>
+            <div class="field"><label>MIG:</label><input type="text" id="fMig" placeholder="d8" oninput="save()"></div>
+            <div class="field"><label>WLP:</label><input type="text" id="fWlp" placeholder="d8" oninput="save()"></div>
+        </div>
+        <hr style="border:0; border-top:1px dashed #000; margin:15px 0;">
+        <div class="grid-2">
+            <div class="field"><label>PV (P. Vida):</label><input type="text" id="fPV" oninput="save()"></div>
+            <div class="field"><label>PM (P. Mente):</label><input type="text" id="fPM" oninput="save()"></div>
+            <div class="field"><label>IP (Inven.):</label><input type="text" id="fIP" oninput="save()"></div>
+            <div class="field"><label>Zenit (Money):</label><input type="text" id="fZenit" oninput="save()"></div>
+        </div>
+    </div>
+</details>
+
+<details open>
+    <summary>-- 03. DEFESAS E INICIATIVA --</summary>
+    <div class="content grid-2">
+        <div class="field"><label>Defesa:</label><input type="text" id="fDef" oninput="save()"></div>
+        <div class="field"><label>Def. Mágica:</label><input type="text" id="fMDef" oninput="save()"></div>
+        <div class="field"><label>Iniciativa:</label><input type="text" id="fInit" oninput="save()"></div>
+    </div>
+</details>
+
+<details open>
+    <summary>-- 04. CLASSES E HABILIDADES --</summary>
+    <div class="content">
+        <label for="fClasses">Classes:</label>
+        <textarea id="fClasses" placeholder="Ex: Arcanista 2, Elementalista 3" oninput="save()"></textarea>
+        <label for="fSkills" style="display:block; margin-top:15px;">Habilidades (Skills):</label>
+        <textarea id="fSkills" oninput="save()"></textarea>
+    </div>
+</details>
+
+<details>
+    <summary>-- 05. EQUIPAMENTO --</summary>
+    <div class="content">
+        <textarea id="fEquip" oninput="save()"></textarea>
+    </div>
+</details>
+
+<details>
+    <summary>-- 06. HISTÓRIA E NOTAS --</summary>
+    <div class="content">
+        <label for="fHistory">História:</label>
+        <textarea id="fHistory" oninput="save()"></textarea>
+        <label for="fNotes" style="display:block; margin-top:15px;">Notas Adicionais:</label>
+        <textarea id="fNotes" oninput="save()"></textarea>
+    </div>
+</details>
+
+<div class="actions">
+    <button onclick="exportTXT()">EXPORTAR (.TXT)</button>
+    <button onclick="exportJSON()">EXPORTAR (.JSON)</button>
+    <button onclick="document.getElementById('importFile').click()">IMPORTAR (.JSON)</button>
+    <input type="file" id="importFile" style="display:none" onchange="importJSON(event)">
+</div>
 
 <script>
-    const fields = [
-        'fName', 'fIdent', 'fTheme', 'fOrigin', 'fLevel',
-        'fDex', 'fIns', 'fMig', 'fWlp',
-        'fPV', 'fPM', 'fDef', 'fMDef',
-        'fClasses', 'fSkills', 'fEquip', 'fHistory', 'fNotes'
+    const fieldIds = [
+        'fName', 'fPlayer', 'fIdent', 'fTheme', 'fOrigin', 'fLvl',
+        'fDex', 'fIns', 'fMig', 'fWlp', 'fPV', 'fPM', 'fIP',
+        'fDef', 'fMDef', 'fInit', 'fZenit', 'fClasses', 'fSkills',
+        'fEquip', 'fHistory', 'fNotes'
     ];
 
     function save() {
         const data = {};
-        fields.forEach(id => {
-            data[id] = document.getElementById(id).value;
+        fieldIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) data[id] = el.value;
         });
-        localStorage.setItem('ficha_libre_data', JSON.stringify(data));
+        localStorage.setItem('fu_txt_sheet', JSON.stringify(data));
     }
 
     function load() {
-        const raw = localStorage.getItem('ficha_libre_data');
+        const raw = localStorage.getItem('fu_txt_sheet');
         if (raw) {
             const data = JSON.parse(raw);
-            fields.forEach(id => {
-                if (data[id] !== undefined) {
-                    document.getElementById(id).value = data[id];
-                }
+            fieldIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && data[id] !== undefined) el.value = data[id];
             });
         }
     }
 
-    function downloadJSON() {
-        const data = {};
-        fields.forEach(id => {
-            data[id] = document.getElementById(id).value;
-        });
-        const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
-        const a = document.createElement('a');
-        const name = document.getElementById('fName').value || 'Personagem';
-        a.href = URL.createObjectURL(blob);
-        a.download = `Ficha_${name.replace(/\s+/g, '_')}.json`;
-        a.click();
-    }
-
-    function uploadJSON(e) {
-        const reader = new FileReader();
-        reader.onload = (ev) => {
-            try {
-                const data = JSON.parse(ev.target.result);
-                fields.forEach(id => {
-                    if (data[id] !== undefined) {
-                        document.getElementById(id).value = data[id];
-                    }
-                });
-                save();
-                alert('Ficha carregada com sucesso!');
-            } catch (err) {
-                alert('Erro ao carregar o arquivo JSON.');
+    function exportTXT() {
+        let name = document.getElementById('fName').value || 'Personagem';
+        let txt = `-- FICHA: ${name.toUpperCase()} --\n\n`;
+        fieldIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                const label = document.querySelector(`label[for="${id}"]`)?.innerText || id.replace('f', '');
+                txt += `${label.padEnd(20)} ${el.value}\n`;
             }
-        };
-        reader.readAsText(e.target.files[0]);
-    }
-
-    function downloadTXT() {
-        const name = document.getElementById('fName').value || 'Herói';
-        let txt = `FICHA FÁBULA ÚLTIMA - EDICAO LIVRE\n`;
-        txt += `====================================\n\n`;
-        
-        txt += `NOME: ${document.getElementById('fName').value}\n`;
-        txt += `IDENTIDADE: ${document.getElementById('fIdent').value}\n`;
-        txt += `TEMA: ${document.getElementById('fTheme').value}\n`;
-        txt += `ORIGEM: ${document.getElementById('fOrigin').value}\n`;
-        txt += `NÍVEL: ${document.getElementById('fLevel').value}\n\n`;
-        
-        txt += `ATRIBUTOS:\n`;
-        txt += `DEX: ${document.getElementById('fDex').value} | INS: ${document.getElementById('fIns').value}\n`;
-        txt += `MIG: ${document.getElementById('fMig').value} | WLP: ${document.getElementById('fWlp').value}\n\n`;
-        
-        txt += `STATUS:\n`;
-        txt += `PV: ${document.getElementById('fPV').value} | PM: ${document.getElementById('fPM').value}\n`;
-        txt += `DEFESA: ${document.getElementById('fDef').value} | DEF. MÁGICA: ${document.getElementById('fMDef').value}\n\n`;
-        
-        txt += `CLASSES E HABILIDADES:\n`;
-        txt += `${document.getElementById('fClasses').value}\n\n`;
-        txt += `DETALHES DAS HABILIDADES:\n`;
-        txt += `${document.getElementById('fSkills').value}\n\n`;
-        
-        txt += `INVENTÁRIO:\n`;
-        txt += `${document.getElementById('fEquip').value}\n\n`;
-        
-        txt += `HISTÓRIA:\n`;
-        txt += `${document.getElementById('fHistory').value}\n\n`;
-        
-        txt += `NOTAS:\n`;
-        txt += `${document.getElementById('fNotes').value}\n`;
-
+        });
         const blob = new Blob([txt], {type: 'text/plain'});
+        const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
+        a.href = url;
         a.download = `Ficha_${name.replace(/\s+/g, '_')}.txt`;
         a.click();
+    }
+
+    function exportJSON() {
+        const data = {};
+        fieldIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) data[id] = el.value;
+        });
+        const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Backup_Ficha.json`;
+        a.click();
+    }
+
+    function importJSON(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            const data = JSON.parse(ev.target.result);
+            fieldIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && data[id] !== undefined) el.value = data[id];
+            });
+            save();
+        };
+        reader.readAsText(file);
     }
 
     window.onload = load;
