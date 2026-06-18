@@ -3,289 +3,507 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha de Personagem - Fábula Última</title>
+    <title>Ficha Fabula Ultima - Versão Final</title>
     <style>
-        :root { --bg: #ffffff; --txt: #000000; --acc: #0056b3; --focus: #ffbf47; --border: #000000; }
-        body { font-family: sans-serif; line-height: 1.5; color: var(--txt); background: var(--bg); margin: 0; padding: 10px; }
-        header { border-bottom: 4px solid var(--border); padding-bottom: 10px; margin-bottom: 20px; }
-        h1 { margin: 0; font-size: 1.8rem; }
-        
-        details { border: 3px solid var(--border); margin-bottom: 15px; background: #fff; }
-        summary { padding: 15px; font-weight: bold; cursor: pointer; background: #eee; border-bottom: 2px solid var(--border); font-size: 1.2rem; }
-        summary:focus { outline: 4px solid var(--focus); background: var(--focus); }
-        .content { padding: 15px; }
+        :root {
+            --bg: #ffffff;
+            --txt: #000000;
+            --acc: #0056b3;
+            --focus: #ffbf47;
+            --border: #000000;
+            --warn: #dc3545;
+            --success: #28a745;
+            --secondary-bg: #f8f9fa;
+        }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
-        label { font-weight: bold; display: block; margin-bottom: 5px; font-size: 1.1rem; }
-        input, select, textarea { width: 100%; padding: 12px; border: 2px solid var(--border); font-size: 1.1rem; box-sizing: border-box; background: #fff; color: #000; }
-        input:focus, select:focus, textarea:focus { outline: 5px solid var(--focus); }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--txt);
+            background: var(--bg);
+            margin: 0;
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
 
-        .stats-box { border: 3px solid var(--border); padding: 15px; text-align: center; }
-        .big-number { font-size: 2.2rem; font-weight: bold; color: var(--acc); display: block; }
-        
-        .btn-group { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
-        button { padding: 15px 20px; font-weight: bold; cursor: pointer; border: 3px solid #000; font-size: 1.1rem; background: #fff; }
-        button:focus { background: var(--focus); outline: 4px solid var(--border); }
-        .btn-add { background: #d4edda; }
-        .btn-remove { background: #f8d7da; padding: 5px 10px; font-size: 0.9rem; }
-        .btn-export { background: #cce5ff; }
+        header {
+            border-bottom: 5px solid var(--border);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
 
-        .class-selection { border: 2px solid #ccc; padding: 15px; margin-bottom: 15px; }
-        .skill-item { border-bottom: 1px solid #ccc; padding: 10px 0; display: flex; justify-content: space-between; align-items: center; }
-        .skill-list-box { max-height: 300px; overflow-y: auto; border: 1px solid #000; padding: 10px; margin-top: 10px; }
-        .chosen-skill { border: 2px solid var(--acc); padding: 10px; margin-bottom: 10px; background: #f9f9f9; }
+        h1 { margin: 0; font-size: 2rem; text-transform: uppercase; }
+
+        details {
+            border: 3px solid var(--border);
+            margin-bottom: 20px;
+            background: var(--bg);
+        }
+
+        summary {
+            padding: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #eee;
+            border-bottom: 3px solid var(--border);
+            font-size: 1.3rem;
+        }
+
+        summary:focus {
+            outline: 5px solid var(--focus);
+            background: var(--focus);
+        }
+
+        .content { padding: 20px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border);
+            font-size: 1.1rem;
+            box-sizing: border-box;
+            background: #fff;
+            color: #000;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: 5px solid var(--focus);
+            border-color: var(--focus);
+        }
+
+        .stats-box {
+            border: 3px solid var(--border);
+            padding: 15px;
+            text-align: center;
+            background: #fdfdfd;
+        }
+
+        .big-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--acc);
+            display: block;
+        }
+
+        .total-level-box {
+            background: #000;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            border: 3px solid #000;
+            font-size: 1rem;
+            background: #fff;
+            transition: 0.2s;
+            display: inline-block;
+        }
+
+        .btn:hover, .btn:focus {
+            background: var(--focus);
+            outline: 4px solid var(--border);
+        }
+
+        .btn-add { background: #d4edda; margin-bottom: 15px; width: 100%; }
+        .btn-remove { background: #f8d7da; border-color: #721c24; margin-top: 10px; }
+        .btn-skill { background: #e2f0ff; margin-bottom: 10px; }
+        .btn-companion { background: #fff3cd; margin-bottom: 10px; }
+
+        .class-block {
+            border: 2px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: #fafafa;
+        }
+
+        .skill-block, .companion-block {
+            border-left: 5px solid var(--acc);
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            margin-left: 10px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .companion-block { border-left-color: #ffc107; }
+
+        .warning { color: var(--warn); font-weight: bold; margin-top: 10px; border: 2px solid var(--warn); padding: 5px; }
+        .success { color: var(--success); font-weight: bold; margin-top: 10px; }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        @media print {
+            .btn, .btn-group { display: none !important; }
+            details { border: 1px solid #000; }
+            summary { background: #fff; }
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Fábula Última - Ficha de Personagem</h1>
+    <h1>Fabula Ultima - Ficha de Personagem</h1>
+    <p>Arquitetura Flexível e Acessível (🐉 Eu Concego Jogar)</p>
 </header>
 
-<main>
+<main id="app">
+    <!-- 1. Identidade -->
     <details open>
-        <summary>1. Identidade e Aparência</summary>
+        <summary>1. Identidade e História</summary>
         <div class="content">
             <div class="grid">
-                <div><label for="fName">Nome:</label><input type="text" id="fName"></div>
-                <div><label for="fIdent">Identidade:</label><input type="text" id="fIdent"></div>
-                <div><label for="fTheme">Tema:</label><input type="text" id="fTheme"></div>
-                <div><label for="fLvl">Nível Total:</label><input type="number" id="fLvl" value="5" readonly></div>
+                <div><label for="fName">Nome do Personagem:</label><input type="text" id="fName" placeholder="Ex: Galatea"></div>
+                <div><label for="fIdent">Identidade:</label><input type="text" id="fIdent" placeholder="Ex: Guerreira Espiritual"></div>
+                <div><label for="fTheme">Tema:</label><input type="text" id="fTheme" placeholder="Ex: Justiça"></div>
+                <div><label for="fOrigin">Origem:</label><input type="text" id="fOrigin" placeholder="Ex: Reino de Alancia"></div>
             </div>
-            <div style="margin-top:15px">
-                <label for="fDesc">Descrição Física:</label>
-                <textarea id="fDesc" rows="3"></textarea>
+            <div style="margin-top:20px">
+                <label for="fHistory">História / Background:</label>
+                <textarea id="fHistory" rows="5" placeholder="Conte a trajetória do seu personagem..."></textarea>
             </div>
         </div>
     </details>
 
+    <!-- 2. Atributos -->
     <details open>
-        <summary>2. Atributos e Cálculos</summary>
+        <summary>2. Atributos e Defesas</summary>
         <div class="content">
+            <div class="total-level-box" aria-live="polite">Nível Total: <span id="vTotalLvl">0</span> / 50</div>
             <div class="grid">
-                <div><label for="fDex">Destreza (DEX):</label><select id="fDex" onchange="calc()"><option value="6">d6</option><option value="8" selected>d8</option><option value="10">d10</option><option value="12">d12</option></select></div>
-                <div><label for="fIns">Intuição (INS):</label><select id="fIns" onchange="calc()"><option value="6">d6</option><option value="8" selected>d8</option><option value="10">d10</option><option value="12">d12</option></select></div>
-                <div><label for="fMig">Vigor (MIG):</label><select id="fMig" onchange="calc()"><option value="6">d6</option><option value="8" selected>d8</option><option value="10">d10</option><option value="12">d12</option></select></div>
-                <div><label for="fWlp">Vontade (WLP):</label><select id="fWlp" onchange="calc()"><option value="6">d6</option><option value="8" selected>d8</option><option value="10">d10</option><option value="12">d12</option></select></div>
+                <div>
+                    <label for="fDex">Destreza (DEX):</label>
+                    <select id="fDex" onchange="calculateAll()">
+                        <option value="6">d6</option><option value="8" selected>d8</option><option value="10">d10</option><option value="12">d12</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="fIns">Intuição (INS):</label>
+                    <select id="fIns" onchange="calculateAll()">
+                        <option value="6">d6</option><option value="8" selected>d8</option><option value="10">d10</option><option value="12">d12</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="fMig">Vigor (MIG):</label>
+                    <select id="fMig" onchange="calculateAll()">
+                        <option value="6">d6</option><option value="8" selected>d8</option><option value="10">d10</option><option value="12">d12</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="fWlp">Vontade (WLP):</label>
+                    <select id="fWlp" onchange="calculateAll()">
+                        <option value="6">d6</option><option value="8" selected>d8</option><option value="10">d10</option><option value="12">d12</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="grid" style="margin-top:20px">
-                <div class="stats-box"><label>Vida (PV)</label><span id="vPv" class="big-number">--</span></div>
-                <div class="stats-box"><label>Mente (PM)</label><span id="vPm" class="big-number">--</span></div>
-                <div class="stats-box"><label>Defesa</label><span id="vDef" class="big-number">--</span></div>
-                <div class="stats-box"><label>D. Mágica</label><span id="vMdef" class="big-number">--</span></div>
+            <div class="grid" style="margin-top:30px">
+                <div class="stats-box"><label>Pontos de Vida (PV)</label><span id="vPv" class="big-number">--</span><small>MIG * 5 + Nível + Bônus</small></div>
+                <div class="stats-box"><label>Pontos de Mente (PM)</label><span id="vPm" class="big-number">--</span><small>WLP * 5 + Nível + Bônus</small></div>
+                <div class="stats-box"><label>Defesa</label><span id="vDef" class="big-number">--</span><small>Igual a DEX</small></div>
+                <div class="stats-box"><label>Defesa Mágica</label><span id="vMdef" class="big-number">--</span><small>Igual a INS</small></div>
+            </div>
+            <div class="stats-box" style="margin-top:20px">
+                <label>Iniciativa</label>
+                <span id="vIni" class="big-number">--</span>
+                <small>(DEX + INS) / 2</small>
             </div>
         </div>
     </details>
 
+    <!-- 3. Classes -->
     <details open>
-        <summary>3. Seleção de Classes e Níveis (Máx 5)</summary>
+        <summary>3. Classes e Habilidades</summary>
         <div class="content">
-            <p>Selecione até 3 classes e distribua os 5 níveis iniciais:</p>
-            <div id="classSelectors">
-                <!-- Selectors generated by JS -->
-            </div>
-            <p id="levelWarning" style="color:red; font-weight:bold; display:none;">A soma dos níveis deve ser exatamente 5!</p>
+            <button class="btn btn-add" onclick="addClass()">+ Adicionar Nova Classe</button>
+            <div id="classArea"></div>
         </div>
     </details>
 
+    <!-- 4. Equipamentos -->
     <details>
-        <summary>4. Habilidades das Classes Selecionadas</summary>
+        <summary>4. Equipamentos e Inventário</summary>
         <div class="content">
-            <div id="availableSkills">
-                <p>Selecione as classes acima para ver as habilidades disponíveis.</p>
-            </div>
+            <label for="fEquip">Itens Equipados e Mochila:</label>
+            <textarea id="fEquip" rows="8" placeholder="Armas, armaduras, acessórios e consumíveis..."></textarea>
         </div>
     </details>
 
-    <details open>
-        <summary>5. Suas Habilidades e Inventário</summary>
+    <!-- 5. Notas -->
+    <details>
+        <summary>5. Notas e Outros Detalhes</summary>
         <div class="content">
-            <div id="chosenSkillsList"></div>
-            <label for="fNotes" style="margin-top:15px">Equipamento e Notas:</label>
-            <textarea id="fNotes" rows="6"></textarea>
+            <label for="fNotes">Observações Adicionais:</label>
+            <textarea id="fNotes" rows="6" placeholder="Vínculos, Projetos, etc."></textarea>
         </div>
     </details>
 
-    <div class="btn-group">
-        <button class="btn-export" onclick="exportTXT()">📄 Baixar TXT</button>
-        <button class="btn-save" onclick="exportJSON()">📤 Salvar Backup</button>
-        <button onclick="document.getElementById('importFile').click()">📥 Carregar Backup</button>
+    <div class="btn-group" style="margin-top:30px; display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+        <button class="btn" style="background: #cce5ff;" onclick="exportJSON()">📤 Salvar Ficha (JSON)</button>
+        <button class="btn" style="background: #d1ecf1;" onclick="document.getElementById('importFile').click()">📥 Carregar Ficha</button>
+        <button class="btn" style="background: #e2e3e5;" onclick="window.print()">🖨️ Imprimir / PDF</button>
         <input type="file" id="importFile" style="display:none" onchange="importJSON(event)">
     </div>
 </main>
 
 <script>
-const CLASS_DATA = {
-    "Arcanista": { bonus: "pm", skills: ["Regeneração Arcana", "Vincular e Invocar", "Força Fantasma", "Invocação Rápida", "Ritual Arcanista"] },
-    "Atirador": { bonus: "pv", skills: ["Rajada", "Fogo Cruzado", "Olho de Águia", "Mestria em Armas à Distância", "Tiro de Advertência"] },
-    "Chantre": { bonus: "pm", skills: ["Magicanção", "Ressonância", "Canção da sereia", "Barreira sonora", "Vibrato"] },
-    "Comandante": { bonus: "pv", skills: ["Édito do Bispo", "Cavalaria de Choque", "Carroça Esmagadora", "Castelo do Rei", "Gambito da Rainha"] },
-    "Dançarino": { bonus: "pv", skills: ["Dança", "Siga meu Passo", "Passos Frenéticos", "Troca Rápida", "Dançarino de Guerra"] },
-    "Domador": { bonus: "pv", skills: ["Ataque Total", "Hibridização", "Interceptador", "Negociar", "Libertar"] },
-    "Elementalista": { bonus: "pm", skills: ["Cataclismo", "Magia Elemental", "Artilharia Mágica", "Ritual Elementalista", "Espada Mágica"] },
-    "Engenhoqueiro": { bonus: "pv", skills: ["Item de Emergência", "Aparelhos", "Chuva de Poções", "Fórmula Secreta", "Visionário"] },
-    "Engenhoca": { bonus: "pv", skills: ["Armamento Magitec", "Magiesferas", "Infusões", "Engenhoca Tática", "Reciclagem"] },
-    "Entropista": { bonus: "pm", skills: ["Absorver PM", "Magia Entrópica", "Sete da Sorte", "Ritual Entrópico", "Tempo Roubado"] },
-    "Esper": { bonus: "pm", skills: ["Foco Cognitivo", "Hipercognição", "Navegador", "Dons Psíquicos", "Psicocinese"] },
-    "Espiritista": { bonus: "pm", skills: ["Poder de Cura", "Ritualismo Espiritista", "Magia Espiritual", "Magia de Suporte", "Vismago"] },
-    "Florista": { bonus: "pm", skills: ["Jardinagem de Batalha", "Cloromancia", "Crescimento", "Nuvem de Esporos", "Espinhos"] },
-    "Fúria": { bonus: "pv", skills: ["Adrenalina", "Frenesi", "Espírito Indomável", "Provocar", "Resistir"] },
-    "Gastrônomo": { bonus: "pv", skills: ["Culinária", "Faca e Garfo", "Feito com Amor", "Sal e Pimenta", "Cozinheiro Andarilho"] },
-    "Guardião": { bonus: "pv", skills: ["Retaliação", "Mestria Defensiva", "Portador de dois Escudos", "Fortaleza", "Proteger"] },
-    "Invocador": { bonus: "pm", skills: ["Harmonia Elemental", "Invocação", "Invocação Vinculada", "Ondulações", "Expansão da Fonte"] },
-    "Ladino": { bonus: "pv", skills: ["Golpe Baixo", "Esquiva", "Alta Velocidade", "Até Mais", "Roubo de Alma"] },
-    "Lâmina Sombria": { bonus: "pv", skills: ["Agonia", "Sangue Sombrio", "Coração das Trevas", "Lição Dolorosa", "Golpe Sombrio"] },
-    "Mercante": { bonus: "pv", skills: ["Data de Validade", "Já Ouvi Falar!", "Estoque Privado", "Tesouro Real", "Ventos do Comércio"] },
-    "Mestre de Armas": { bonus: "pv", skills: ["Tempestade de Lâminas", "Triturador de Ossos", "Ruptura", "Contra-ataque", "Mestria em Armas Corpo a Corpo"] },
-    "Mutante": { bonus: "pv", skills: ["Akromorfose", "Biofagia", "Ecdise", "Genoclépsis", "Theriomorfose"] },
-    "Necromante": { bonus: "pm", skills: ["Além dos Reinos da Morte", "Filhos da Sepultura", "O Medo é a Chave", "Para Quem Toca o Sino", "Rondo do Pesadelo"] },
-    "Orador": { bonus: "pm", skills: ["Condenar", "Encorajar", "Minha Confiança em Você", "Persuasivo", "Aliado Inesperado"] },
-    "Piloto": { bonus: "pv", skills: ["Compressão Tecnológica", "Configuração Flexível", "Coração no Motor", "Veículo Pessoal", "Agarre Firme"] },
-    "Quimerista": { bonus: "pm", skills: ["Consumir", "Fala Bestial", "Patogênese", "Ritual Quimerista", "Imitar Magia"] },
-    "Sábio": { bonus: "pm", skills: ["Flash de Intuição", "Focado", "Conhecimento é Poder", "Avaliação Rápida", "Memória Treinada"] },
-    "Simbolista": { bonus: "pm", skills: ["Símbolos Mágicos", "Miragem", "Toque Pessoal", "Conexão Simbólica", "Simbolismo"] },
-    "Viajante": { bonus: "pv", skills: ["Companheiro Fiel", "Astuto", "Conversa de Taverna", "Caçador de Tesouros", "Bem Viajado"] }
-};
+    let charData = {
+        classes: []
+    };
 
-
-    let selectedClasses = [ {name: "", level: 0}, {name: "", level: 0}, {name: "", level: 0} ];
-    let chosenSkills = [];
-
-    function renderSelectors() {
-        const container = document.getElementById('classSelectors');
-        container.innerHTML = selectedClasses.map((c, i) => `
-            <div class="class-selection">
-                <label>Classe ${i+1}:</label>
-                <select onchange="updateClass(${i}, this.value)">
-                    <option value="">-- Selecionar --</option>
-                    ${Object.keys(CLASS_DATA).map(name => `<option value="${name}" ${c.name === name ? 'selected' : ''}>${name}</option>`).join('')}
-                </select>
-                <label style="margin-left:10px">Nível:</label>
-                <select style="width:80px; display:inline" onchange="updateLevel(${i}, this.value)">
-                    ${[0,1,2,3,4,5].map(v => `<option value="${v}" ${c.level == v ? 'selected' : ''}>${v}</option>`).join('')}
-                </select>
-            </div>
-        `).join('');
-        updateSkillsUI();
+    function addClass() {
+        charData.classes.push({
+            id: Date.now(),
+            name: "",
+            level: 1,
+            bonusType: "pv", // pv or pm
+            skills: [],
+            companions: []
+        });
+        render();
     }
 
-    function updateClass(idx, name) {
-        selectedClasses[idx].name = name;
-        if (name && selectedClasses[idx].level === 0) selectedClasses[idx].level = 1;
-        checkLevels();
-        updateSkillsUI();
-        calc();
+    function removeClass(id) {
+        charData.classes = charData.classes.filter(c => c.id !== id);
+        render();
     }
 
-    function updateLevel(idx, val) {
-        selectedClasses[idx].level = parseInt(val) || 0;
-        checkLevels();
-        calc();
-    }
-
-    function checkLevels() {
-        const total = selectedClasses.reduce((sum, c) => sum + c.level, 0);
-        document.getElementById('levelWarning').style.display = total !== 5 ? 'block' : 'none';
-    }
-
-    function updateSkillsUI() {
-        const container = document.getElementById('availableSkills');
-        const active = selectedClasses.filter(c => c.name !== "");
-        if (active.length === 0) {
-            container.innerHTML = "<p>Selecione as classes acima para ver as habilidades.</p>";
-            return;
-        }
-        container.innerHTML = active.map(c => `
-            <div style="margin-bottom:15px">
-                <strong>Habilidades de ${c.name}:</strong>
-                <div class="skill-list-box">
-                    ${CLASS_DATA[c.name].skills.map(s => `
-                        <div class="skill-item">
-                            <span>${s}</span>
-                            <button class="btn-add" onclick="addSkill('${s}', '${c.name}')">Pegar</button>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        `).join('');
-    }
-
-    function addSkill(name, className) {
-        if (!chosenSkills.find(s => s.name === name)) {
-            chosenSkills.push({ name, className, sl: 1 });
-            renderChosenSkills();
+    function addSkill(classId) {
+        const cls = charData.classes.find(c => c.id === classId);
+        if (cls) {
+            cls.skills.push({
+                id: Date.now(),
+                name: "",
+                sl: 1,
+                type: "Perícia",
+                desc: ""
+            });
+            render();
         }
     }
 
-    function renderChosenSkills() {
-        const container = document.getElementById('chosenSkillsList');
-        container.innerHTML = chosenSkills.map((s, i) => `
-            <div class="chosen-skill">
-                <strong>${s.name} (${s.className})</strong>
-                <div style="display:flex; align-items:center; gap:10px; margin-top:5px">
-                    <label>Nível (SL):</label>
-                    <select style="width:80px" onchange="chosenSkills[${i}].sl = this.value">
-                        ${[1,2,3,4,5,6,7,8,9,10].map(v => `<option value="${v}" ${s.sl == v ? 'selected' : ''}>${v}</option>`).join('')}
-                    </select>
-                    <button class="btn-remove" onclick="chosenSkills.splice(${i},1); renderChosenSkills()">Remover</button>
-                </div>
-            </div>
-        `).join('');
+    function removeSkill(classId, skillId) {
+        const cls = charData.classes.find(c => c.id === classId);
+        if (cls) {
+            cls.skills = cls.skills.filter(s => s.id !== skillId);
+            render();
+        }
     }
 
-    function calc() {
+    function addCompanion(classId) {
+        const cls = charData.classes.find(c => c.id === classId);
+        if (cls) {
+            cls.companions.push({
+                id: Date.now(),
+                name: "",
+                dex: 6, ins: 6, mig: 6, wlp: 6,
+                skills: ""
+            });
+            render();
+        }
+    }
+
+    function removeCompanion(classId, compId) {
+        const cls = charData.classes.find(c => c.id === classId);
+        if (cls) {
+            cls.companions = cls.companions.filter(co => co.id !== compId);
+            render();
+        }
+    }
+
+    function updateVal(path, val) {
+        const parts = path.split('.');
+        let current = charData;
+        for (let i = 0; i < parts.length - 1; i++) {
+            if (parts[i].includes('[')) {
+                const [name, index] = parts[i].split(/[\[\]]/);
+                current = current[name][index];
+            } else {
+                current = current[parts[i]];
+            }
+        }
+        const last = parts[parts.length - 1];
+        if (last.includes('[')) {
+            const [name, index] = last.split(/[\[\]]/);
+            current[name][index] = val;
+        } else {
+            current[last] = val;
+        }
+        calculateAll();
+    }
+
+    function calculateAll() {
+        let totalLevel = 0;
+        let hpBonus = 0;
+        let mpBonus = 0;
+
+        charData.classes.forEach(c => {
+            const lvl = parseInt(c.level) || 0;
+            totalLevel += lvl;
+            if (c.bonusType === 'pv') hpBonus += 5;
+            if (c.bonusType === 'pm') mpBonus += 5;
+        });
+
+        document.getElementById('vTotalLvl').innerText = totalLevel;
+
         const dex = parseInt(document.getElementById('fDex').value);
         const ins = parseInt(document.getElementById('fIns').value);
         const mig = parseInt(document.getElementById('fMig').value);
         const wlp = parseInt(document.getElementById('fWlp').value);
-        
-        let hpBonus = 0;
-        let mpBonus = 0;
 
-        selectedClasses.forEach(c => {
-            if (c.name && CLASS_DATA[c.name]) {
-                if (CLASS_DATA[c.name].bonus === "pv") hpBonus += 5;
-                if (CLASS_DATA[c.name].bonus === "pm") mpBonus += 5;
-            }
-        });
-
-        document.getElementById('vPv').innerText = (mig * 5) + 5 + hpBonus;
-        document.getElementById('vPm').innerText = (wlp * 5) + 5 + mpBonus;
+        document.getElementById('vPv').innerText = (mig * 5) + totalLevel + hpBonus;
+        document.getElementById('vPm').innerText = (wlp * 5) + totalLevel + mpBonus;
         document.getElementById('vDef').innerText = dex;
         document.getElementById('vMdef').innerText = ins;
+        document.getElementById('vIni').innerText = Math.floor((dex + ins) / 2);
+
+        // Update validation for each class
+        charData.classes.forEach((c, idx) => {
+            const slSum = c.skills.reduce((sum, s) => sum + (parseInt(s.sl) || 0), 0);
+            const warnEl = document.getElementById(`warn-class-${c.id}`);
+            if (warnEl) {
+                if (slSum !== c.level) {
+                    warnEl.style.display = 'block';
+                    warnEl.innerText = `⚠️ Total de SL (${slSum}) deve ser igual ao Nível da Classe (${c.level})`;
+                } else {
+                    warnEl.style.display = 'none';
+                }
+            }
+        });
     }
 
-    function exportTXT() {
-        const n = document.getElementById('fName').value || "Heroi";
-        let txt = `FICHA DE PERSONAGEM - FABULA ULTIMA\n\nNome: ${n}\nIdentidade: ${document.getElementById('fIdent').value}\nTema: ${document.getElementById('fTheme').value}\n\nCLASSES:\n`;
-        selectedClasses.filter(c => c.name).forEach(c => txt += `- ${c.name} (Nível ${c.level})\n`);
-        txt += `\nATRIBUTOS:\nDEX d${document.getElementById('fDex').value} | INS d${document.getElementById('fIns').value}\nMIG d${document.getElementById('fMig').value} | WLP d${document.getElementById('fWlp').value}\n\nSTATUS:\nPV: ${document.getElementById('vPv').innerText} | PM: ${document.getElementById('vPm').innerText}\nDefesa: ${document.getElementById('vDef').innerText} | D.Mag: ${document.getElementById('vMdef').innerText}\n\nHABILIDADES ESCOLHIDAS:\n`;
-        chosenSkills.forEach(s => txt += `- ${s.name} (SL ${s.sl})\n`);
-        txt += `\nNOTAS:\n${document.getElementById('fNotes').value}`;
-        
-        const blob = new Blob([txt], {type: 'text/plain'});
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `Ficha_${n}.txt`;
-        a.click();
+    function render() {
+        const area = document.getElementById('classArea');
+        area.innerHTML = charData.classes.map((c, cIdx) => `
+            <div class="class-block">
+                <div class="grid">
+                    <div>
+                        <label>Nome da Classe:</label>
+                        <input type="text" value="${c.name}" oninput="updateVal('classes[${cIdx}].name', this.value)" placeholder="Ex: Elementalista">
+                    </div>
+                    <div>
+                        <label>Nível (1-10):</label>
+                        <input type="number" min="1" max="10" value="${c.level}" oninput="updateVal('classes[${cIdx}].level', this.value)">
+                    </div>
+                    <div>
+                        <label>Bônus de Atributo:</label>
+                        <select onchange="updateVal('classes[${cIdx}].bonusType', this.value)">
+                            <option value="pv" ${c.bonusType === 'pv' ? 'selected' : ''}>+5 Pontos de Vida</option>
+                            <option value="pm" ${c.bonusType === 'pm' ? 'selected' : ''}>+5 Pontos de Mente</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="warn-class-${c.id}" class="warning" style="display:none"></div>
+
+                <div style="margin-top:20px;">
+                    <label>Habilidades da Classe:</label>
+                    ${c.skills.map((s, sIdx) => `
+                        <div class="skill-block">
+                            <div class="grid">
+                                <div><label>Habilidade:</label><input type="text" value="${s.name}" oninput="updateVal('classes[${cIdx}].skills[${sIdx}].name', this.value)"></div>
+                                <div><label>SL:</label><input type="number" min="1" value="${s.sl}" oninput="updateVal('classes[${cIdx}].skills[${sIdx}].sl', this.value)"></div>
+                                <div>
+                                    <label>Tipo:</label>
+                                    <select onchange="updateVal('classes[${cIdx}].skills[${sIdx}].type', this.value)">
+                                        <option ${s.type === 'Dom' ? 'selected' : ''}>Dom</option>
+                                        <option ${s.type === 'Perícia' ? 'selected' : ''}>Perícia</option>
+                                        <option ${s.type === 'Magia' ? 'selected' : ''}>Magia</option>
+                                        <option ${s.type === 'Canção' ? 'selected' : ''}>Canção</option>
+                                        <option ${s.type === 'Engenhoca' ? 'selected' : ''}>Engenhoca</option>
+                                        <option ${s.type === 'Ingrediente' ? 'selected' : ''}>Ingrediente</option>
+                                        <option ${s.type === 'Invocação' ? 'selected' : ''}>Invocação</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <label style="margin-top:10px">Descrição:</label>
+                            <textarea oninput="updateVal('classes[${cIdx}].skills[${sIdx}].desc', this.value)">${s.desc}</textarea>
+                            <button class="btn btn-remove" onclick="removeSkill(${c.id}, ${s.id})">Remover Habilidade</button>
+                        </div>
+                    `).join('')}
+                    <button class="btn btn-skill" onclick="addSkill(${c.id})">+ Adicionar Habilidade</button>
+                </div>
+
+                <div style="margin-top:20px;">
+                    <label>Construtos / Companheiros / Invocações:</label>
+                    ${c.companions.map((co, coIdx) => `
+                        <div class="companion-block">
+                            <label>Nome:</label>
+                            <input type="text" value="${co.name}" oninput="updateVal('classes[${cIdx}].companions[${coIdx}].name', this.value)">
+                            <div class="grid" style="margin-top:10px">
+                                <div><label>DEX:</label><input type="number" value="${co.dex}" oninput="updateVal('classes[${cIdx}].companions[${coIdx}].dex', this.value)"></div>
+                                <div><label>INS:</label><input type="number" value="${co.ins}" oninput="updateVal('classes[${cIdx}].companions[${coIdx}].ins', this.value)"></div>
+                                <div><label>MIG:</label><input type="number" value="${co.mig}" oninput="updateVal('classes[${cIdx}].companions[${coIdx}].mig', this.value)"></div>
+                                <div><label>WLP:</label><input type="number" value="${co.wlp}" oninput="updateVal('classes[${cIdx}].companions[${coIdx}].wlp', this.value)"></div>
+                            </div>
+                            <label style="margin-top:10px">Habilidades/Notas do Construto:</label>
+                            <textarea oninput="updateVal('classes[${cIdx}].companions[${coIdx}].skills', this.value)">${co.skills}</textarea>
+                            <button class="btn btn-remove" onclick="removeCompanion(${c.id}, ${co.id})">Remover Construto</button>
+                        </div>
+                    `).join('')}
+                    <button class="btn btn-companion" onclick="addCompanion(${c.id})">+ Adicionar Construto/Companheiro</button>
+                </div>
+
+                <button class="btn btn-remove" style="width:100%" onclick="removeClass(${c.id})">🗑️ Excluir Classe ${c.name}</button>
+            </div>
+        `).join('');
+        calculateAll();
     }
 
     function exportJSON() {
         const data = {
-            n: document.getElementById('fName').value,
-            id: document.getElementById('fIdent').value,
-            th: document.getElementById('fTheme').value,
-            desc: document.getElementById('fDesc').value,
-            stats: { d: document.getElementById('fDex').value, i: document.getElementById('fIns').value, m: document.getElementById('fMig').value, w: document.getElementById('fWlp').value },
-            classes: selectedClasses,
-            skills: chosenSkills,
+            ident: {
+                name: document.getElementById('fName').value,
+                ident: document.getElementById('fIdent').value,
+                theme: document.getElementById('fTheme').value,
+                origin: document.getElementById('fOrigin').value,
+                history: document.getElementById('fHistory').value
+            },
+            attributes: {
+                dex: document.getElementById('fDex').value,
+                ins: document.getElementById('fIns').value,
+                mig: document.getElementById('fMig').value,
+                wlp: document.getElementById('fWlp').value
+            },
+            classes: charData.classes,
+            inventory: document.getElementById('fEquip').value,
             notes: document.getElementById('fNotes').value
         };
-        const blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
+        const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
         const a = document.createElement('a');
+        const name = document.getElementById('fName').value || 'Personagem';
         a.href = URL.createObjectURL(blob);
-        a.download = `Backup_Ficha.json`;
+        a.download = `Ficha_Fabula_${name}.json`;
         a.click();
     }
 
@@ -293,25 +511,30 @@ const CLASS_DATA = {
         const reader = new FileReader();
         reader.onload = (ev) => {
             const d = JSON.parse(ev.target.result);
-            document.getElementById('fName').value = d.n || "";
-            document.getElementById('fIdent').value = d.id || "";
-            document.getElementById('fTheme').value = d.th || "";
-            document.getElementById('fDesc').value = d.desc || "";
-            document.getElementById('fDex').value = d.stats.d;
-            document.getElementById('fIns').value = d.stats.i;
-            document.getElementById('fMig').value = d.stats.m;
-            document.getElementById('fWlp').value = d.stats.w;
-            selectedClasses = d.classes || [ {name: "", level: 0}, {name: "", level: 0}, {name: "", level: 0} ];
-            chosenSkills = d.skills || [];
+            document.getElementById('fName').value = d.ident.name || "";
+            document.getElementById('fIdent').value = d.ident.ident || "";
+            document.getElementById('fTheme').value = d.ident.theme || "";
+            document.getElementById('fOrigin').value = d.ident.origin || "";
+            document.getElementById('fHistory').value = d.ident.history || "";
+            
+            document.getElementById('fDex').value = d.attributes.dex;
+            document.getElementById('fIns').value = d.attributes.ins;
+            document.getElementById('fMig').value = d.attributes.mig;
+            document.getElementById('fWlp').value = d.attributes.wlp;
+
+            charData.classes = d.classes || [];
+            document.getElementById('fEquip').value = d.inventory || "";
             document.getElementById('fNotes').value = d.notes || "";
-            renderSelectors();
-            renderChosenSkills();
-            calc();
+            render();
         };
         reader.readAsText(e.target.files[0]);
     }
 
-    window.onload = () => { renderSelectors(); calc(); };
+    window.onload = () => {
+        // Initial setup
+        calculateAll();
+    };
 </script>
+
 </body>
 </html>
