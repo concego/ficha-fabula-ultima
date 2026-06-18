@@ -3,331 +3,346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha de Personagem - Fábula Última</title>
+    <title>Ficha Fábula Última - Edição Livre</title>
     <style>
-        :root { --bg: #ffffff; --txt: #000000; --acc: #0056b3; --focus: #ffbf47; --border: #000000; --warn: #dc3545; --success: #28a745; }
-        body { font-family: sans-serif; line-height: 1.5; color: var(--txt); background: var(--bg); margin: 0; padding: 10px; }
-        header { border-bottom: 4px solid var(--border); padding-bottom: 10px; margin-bottom: 20px; }
-        h1 { margin: 0; font-size: 1.8rem; }
+        :root { 
+            --bg: #ffffff; 
+            --txt: #000000; 
+            --acc: #0056b3; 
+            --focus: #ffbf47; 
+            --border: #000000; 
+            --section-bg: #fdfdfd;
+        }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            color: var(--txt); 
+            background: var(--bg); 
+            margin: 0; 
+            padding: 20px; 
+            max-width: 800px;
+            margin: auto;
+        }
+        header { 
+            border-bottom: 5px solid var(--border); 
+            padding-bottom: 10px; 
+            margin-bottom: 25px; 
+            text-align: center;
+        }
+        h1 { margin: 0; font-size: 1.8rem; text-transform: uppercase; }
         
-        details { border: 3px solid var(--border); margin-bottom: 15px; background: #fff; }
-        summary { padding: 15px; font-weight: bold; cursor: pointer; background: #eee; border-bottom: 2px solid var(--border); font-size: 1.2rem; }
-        summary:focus { outline: 4px solid var(--focus); background: var(--focus); }
-        .content { padding: 15px; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
-        label { font-weight: bold; display: block; margin-bottom: 5px; font-size: 1.1rem; }
-        input, select, textarea { width: 100%; padding: 12px; border: 2px solid var(--border); font-size: 1.1rem; box-sizing: border-box; background: #fff; color: #000; }
-        input:focus, select:focus, textarea:focus { outline: 5px solid var(--focus); }
-
-        .stats-box { border: 3px solid var(--border); padding: 15px; text-align: center; }
-        .big-number { font-size: 2.2rem; font-weight: bold; color: var(--acc); display: block; }
+        details { 
+            border: 3px solid var(--border); 
+            margin-bottom: 20px; 
+            background: var(--section-bg); 
+        }
+        summary { 
+            padding: 15px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            background: #eeeeee; 
+            border-bottom: 2px solid var(--border); 
+            font-size: 1.2rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before {
+            content: '▶';
+            display: inline-block;
+            margin-right: 10px;
+            transition: transform 0.2s;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        summary:focus { 
+            outline: 4px solid var(--focus); 
+            background: var(--focus); 
+        }
         
-        .btn-group { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
-        button { padding: 15px 20px; font-weight: bold; cursor: pointer; border: 3px solid #000; font-size: 1.1rem; background: #fff; }
-        button:focus { background: var(--focus); outline: 4px solid var(--border); }
-        .btn-add { background: #d4edda; margin-bottom: 10px; }
-        .btn-remove { background: #f8d7da; padding: 5px 10px; font-size: 0.9rem; margin-top: 10px; }
-        .btn-export { background: #cce5ff; }
-
-        .class-container { border-bottom: 2px dashed #ccc; padding-bottom: 15px; margin-bottom: 15px; }
-        .skill-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; padding: 5px; border-bottom: 1px solid #eee; }
-        .skill-row label { flex: 1; margin: 0; }
-        .skill-row select { width: 80px; }
-
-        .warning { color: var(--warn); font-weight: bold; margin-top: 5px; }
-        .success { color: var(--success); font-weight: bold; }
+        .content { padding: 20px; }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            gap: 20px; 
+        }
         
-        .total-level-box { background: #f0f0f0; padding: 10px; border: 2px solid #000; margin-bottom: 10px; font-size: 1.2rem; font-weight: bold; }
+        label { 
+            font-weight: bold; 
+            display: block; 
+            margin-bottom: 8px; 
+            font-size: 1.1rem; 
+        }
+        input[type="text"], textarea { 
+            width: 100%; 
+            padding: 12px; 
+            border: 2px solid var(--border); 
+            font-size: 1.1rem; 
+            box-sizing: border-box; 
+            background: #ffffff; 
+            color: #000000; 
+            border-radius: 4px;
+        }
+        textarea { min-height: 120px; resize: vertical; }
+        input:focus, textarea:focus { 
+            outline: 4px solid var(--focus); 
+            border-color: var(--acc);
+        }
+        
+        .btn-group { 
+            display: flex; 
+            gap: 15px; 
+            margin-top: 30px; 
+            flex-wrap: wrap; 
+        }
+        button { 
+            flex: 1; 
+            padding: 15px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            border: 3px solid var(--border); 
+            font-size: 1rem;
+            background: #eeeeee;
+            transition: background 0.2s;
+            min-width: 150px;
+        }
+        button:hover { background: #dddddd; }
+        button:focus { outline: 4px solid var(--focus); }
+        .btn-save { background: #333333; color: #ffffff; }
+        .btn-save:hover { background: #000000; }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Fábula Última - Ficha de Personagem</h1>
+    <h1>Fábula Última - Edição Livre</h1>
+    <p>Preenchimento flexível (apenas texto) • Auto-salvamento ativado</p>
 </header>
 
 <main>
     <details open>
-        <summary>1. Identidade e História</summary>
-        <div class="content">
+        <summary aria-controls="sec-ident">1. Identidade e Atributos</summary>
+        <div id="sec-ident" class="content">
             <div class="grid">
-                <div><label for="fName">Nome:</label><input type="text" id="fName"></div>
-                <div><label for="fIdent">Identidade:</label><input type="text" id="fIdent"></div>
-                <div><label for="fTheme">Tema:</label><input type="text" id="fTheme"></div>
-                <div><label for="fOrigin">Origem:</label><input type="text" id="fOrigin"></div>
+                <div>
+                    <label for="fName">Nome do Personagem:</label>
+                    <input type="text" id="fName" oninput="save()" placeholder="Ex: Valerius" aria-label="Nome do Personagem">
+                </div>
+                <div>
+                    <label for="fIdent">Identidade:</label>
+                    <input type="text" id="fIdent" oninput="save()" placeholder="Ex: Cavaleiro das Rosas" aria-label="Identidade">
+                </div>
+                <div>
+                    <label for="fTheme">Tema:</label>
+                    <input type="text" id="fTheme" oninput="save()" placeholder="Ex: Justiça" aria-label="Tema">
+                </div>
+                <div>
+                    <label for="fOrigin">Origem:</label>
+                    <input type="text" id="fOrigin" oninput="save()" placeholder="Ex: Reinos de Ferro" aria-label="Origem">
+                </div>
+                <div>
+                    <label for="fLevel">Nível:</label>
+                    <input type="text" id="fLevel" oninput="save()" placeholder="Ex: 5" aria-label="Nível">
+                </div>
             </div>
-            <div style="margin-top:15px">
-                <label for="fHistory">História / Background:</label>
-                <textarea id="fHistory" rows="4"></textarea>
-            </div>
-            <div style="margin-top:15px">
-                <label for="fDesc">Descrição Física:</label>
-                <textarea id="fDesc" rows="2"></textarea>
-            </div>
-        </div>
-    </details>
-
-    <details open>
-        <summary>2. Atributos e Cálculos</summary>
-        <div class="content">
-            <div class="total-level-box">Nível Total: <span id="vTotalLvl">0</span> / 50</div>
-            <div class="grid">
-                <div><label for="fDex">Destreza (DEX):</label><select id="fDex" onchange="calc()"><option value="6">d6</option><option value="8" selected>d8</option><option value="10">d10</option><option value="12">d12</option></select></div>
-                <div><label for="fIns">Intuição (INS):</label><select id="fIns" onchange="calc()"><option value="6">d6</option><option value="8" selected>d8</option><option value="10">d10</option><option value="12">d12</option></select></div>
-                <div><label for="fMig">Vigor (MIG):</label><select id="fMig" onchange="calc()"><option value="6">d6</option><option value="8" selected>d8</option><option value="10">d10</option><option value="12">d12</option></select></div>
-                <div><label for="fWlp">Vontade (WLP):</label><select id="fWlp" onchange="calc()"><option value="6">d6</option><option value="8" selected>d8</option><option value="10">d10</option><option value="12">d12</option></select></div>
+            
+            <div class="grid" style="margin-top:20px">
+                <div>
+                    <label for="fDex">DEX (Destreza):</label>
+                    <input type="text" id="fDex" oninput="save()" placeholder="Ex: d8" aria-label="Destreza">
+                </div>
+                <div>
+                    <label for="fIns">INS (Intuição):</label>
+                    <input type="text" id="fIns" oninput="save()" placeholder="Ex: d10" aria-label="Intuição">
+                </div>
+                <div>
+                    <label for="fMig">MIG (Vigor):</label>
+                    <input type="text" id="fMig" oninput="save()" placeholder="Ex: d6" aria-label="Vigor">
+                </div>
+                <div>
+                    <label for="fWlp">WLP (Vontade):</label>
+                    <input type="text" id="fWlp" oninput="save()" placeholder="Ex: d8" aria-label="Vontade">
+                </div>
             </div>
 
             <div class="grid" style="margin-top:20px">
-                <div class="stats-box"><label>Vida (PV)</label><span id="vPv" class="big-number">--</span></div>
-                <div class="stats-box"><label>Mente (PM)</label><span id="vPm" class="big-number">--</span></div>
-                <div class="stats-box"><label>Defesa</label><span id="vDef" class="big-number">--</span></div>
-                <div class="stats-box"><label>D. Mágica</label><span id="vMdef" class="big-number">--</span></div>
+                <div>
+                    <label for="fPV">Pontos de Vida (PV):</label>
+                    <input type="text" id="fPV" oninput="save()" placeholder="Atual / Máximo" aria-label="Pontos de Vida">
+                </div>
+                <div>
+                    <label for="fPM">Pontos de Mente (PM):</label>
+                    <input type="text" id="fPM" oninput="save()" placeholder="Atual / Máximo" aria-label="Pontos de Mente">
+                </div>
+                <div>
+                    <label for="fDef">Defesa:</label>
+                    <input type="text" id="fDef" oninput="save()" placeholder="Ex: 10" aria-label="Defesa">
+                </div>
+                <div>
+                    <label for="fMDef">Defesa Mágica:</label>
+                    <input type="text" id="fMDef" oninput="save()" placeholder="Ex: 8" aria-label="Defesa Mágica">
+                </div>
             </div>
-        </div>
-    </details>
-
-    <details open>
-        <summary>3. Classes e Habilidades</summary>
-        <div class="content">
-            <button class="btn-add" onclick="addClass()">+ Adicionar Classe</button>
-            <div id="classArea">
-                <!-- Dynamic Classes Here -->
-            </div>
-            <p id="totalLevelWarning" class="warning" style="display:none;">Personagens iniciais começam no Nível 5!</p>
-        </div>
-    </details>
-
-    <details open>
-        <summary>4. Inventário e Equipamento</summary>
-        <div class="content">
-            <label for="fEquip">Equipamentos:</label>
-            <textarea id="fEquip" rows="6" placeholder="Armas, Armaduras, Itens..."></textarea>
         </div>
     </details>
 
     <details>
-        <summary>5. Notas e Outros</summary>
-        <div class="content">
-            <label for="fNotes">Notas:</label>
-            <textarea id="fNotes" rows="6"></textarea>
+        <summary aria-controls="sec-classes">2. Classes e Habilidades</summary>
+        <div id="sec-classes" class="content">
+            <label for="fClasses">Descreva suas Classes e Níveis:</label>
+            <textarea id="fClasses" oninput="save()" placeholder="Ex: Elementalista 2, Ladino 3..." aria-label="Classes e Níveis"></textarea>
+            
+            <label for="fSkills" style="margin-top:15px">Habilidades de Classe:</label>
+            <textarea id="fSkills" oninput="save()" placeholder="Liste suas habilidades e descrições aqui..." aria-label="Habilidades de Classe"></textarea>
+        </div>
+    </details>
+
+    <details>
+        <summary aria-controls="sec-equip">3. Inventário e Equipamento</summary>
+        <div id="sec-equip" class="content">
+            <textarea id="fEquip" oninput="save()" placeholder="Armas, Armaduras, Acessórios e Itens consumíveis..." aria-label="Inventário e Equipamento"></textarea>
+        </div>
+    </details>
+
+    <details>
+        <summary aria-controls="sec-history">4. História e Notas</summary>
+        <div id="sec-history" class="content">
+            <label for="fHistory">História do Personagem:</label>
+            <textarea id="fHistory" oninput="save()" placeholder="Breve biografia..." aria-label="História"></textarea>
+            
+            <label for="fNotes" style="margin-top:15px">Notas de Campanha:</label>
+            <textarea id="fNotes" oninput="save()" placeholder="Lembretes, NPCs, missões..." aria-label="Notas"></textarea>
         </div>
     </details>
 
     <div class="btn-group">
-        <button class="btn-export" onclick="exportTXT()">📄 Baixar TXT</button>
-        <button class="btn-save" onclick="exportJSON()">📤 Salvar Backup</button>
-        <button onclick="document.getElementById('importFile').click()">📥 Carregar Backup</button>
-        <input type="file" id="importFile" style="display:none" onchange="importJSON(event)">
+        <button onclick="downloadJSON()" class="btn-save">📤 Baixar JSON</button>
+        <button onclick="document.getElementById('uploadFile').click()">📥 Carregar JSON</button>
+        <button onclick="downloadTXT()">📄 Baixar TXT</button>
+        <input type="file" id="uploadFile" style="display:none" onchange="uploadJSON(event)" accept=".json">
     </div>
 </main>
 
 <script>
-    const CLASS_DATA = {
-        "Arcanista": { bonus: "pm", skills: ["Regeneração Arcana", "Vincular e Invocar", "Força Fantasma", "Invocação Rápida", "Ritual Arcanista"] },
-        "Atirador": { bonus: "pv", skills: ["Rajada", "Fogo Cruzado", "Olho de Águia", "Mestria em Armas à Distância", "Tiro de Advertência"] },
-        "Chantre": { bonus: "pm", skills: ["Magicanção", "Ressonância", "Canção da sereia", "Barreira sonora", "Vibrato"] },
-        "Comandante": { bonus: "pv", skills: ["Édito do bispo", "Cavalaria de choque", "Carroça esmagadora", "Castelo do rei", "Gambito da rainha"] },
-        "Dançarino": { bonus: "pv", skills: ["Dança", "Siga meu passo", "Passos frenéticos", "Troca rápida", "Dançarino de guerra"] },
-        "Elementalista": { bonus: "pm", skills: ["Cataclismo", "Magia Elemental", "Artilharia Mágica", "Ritual Elementalista", "Espada Mágica"] },
-        "Entropista": { bonus: "pm", skills: ["Absorver PM", "Magia Entrópica", "Sete da Sorte", "Ritual Entrópico", "Tempo Roubado"] },
-        "Espiritista": { bonus: "pm", skills: ["Poder de Cura", "Ritualismo Espiritista", "Magia Espiritual", "Magia de Suporte", "Vismago"] },
-        "Fúria": { bonus: "pv", skills: ["Adrenalina", "Frenesi", "Espírito Indomável", "Provocar", "Resistir"] },
-        "Guardião": { bonus: "pv", skills: ["Retaliação", "Mestria defensiva", "Portador de dois escudos", "Fortaleza", "Proteger"] },
-        "Ladino": { bonus: "pv", skills: ["Golpe Baixo", "Esquiva", "Alta Velocidade", "Até Mais", "Roubo de Alma"] },
-        "Lâmina Sombria": { bonus: "pv", skills: ["Agonia", "Sangue Sombrio", "Coração das Trevas", "Lição Dolorosa", "Golpe Sombrio"] },
-        "Mestre de Armas": { bonus: "pv", skills: ["Tempestade de lâminas", "Triturador de ossos", "Ruptura", "Contra-ataque", "Mestria em armas corpo a corpo"] },
-        "Orador": { bonus: "pm", skills: ["Condenar", "Encorajar", "Minha Confiança em Você", "Persuasivo", "Aliado Inesperado"] },
-        "Quimerista": { bonus: "pm", skills: ["Consumir", "Fala Bestial", "Patogênese", "Ritual Quimerista", "Imitar Magia"] },
-        "Sábio": { bonus: "pm", skills: ["Flash de Intuição", "Focado", "Conhecimento é Poder", "Avaliação Rápida", "Memória Treinada"] },
-        "Viajante": { bonus: "pv", skills: ["Companheiro fiel", "Astuto", "Conversa de taverna", "Caçador de tesouros", "Bem viajado"] },
-        "Florista": { bonus: "pm", skills: ["Jardinagem de Batalha", "Cloromancia", "Enxerto", "Magissementes", "Crescimento Acelerado"] },
-        "Gastrônomo": { bonus: "pv", skills: ["Culinária", "Faca e Garfo", "Feito com Amor", "Sal e Pimenta", "Cozinheiro Andarilho"] },
-        "Invocador": { bonus: "pm", skills: ["Harmonia Elemental", "Invocação", "Invocação Vinculada", "Ondulações", "Expansão da Fonte"] },
-        "Inventor": { bonus: "pv", skills: ["Item de Emergência", "Aparelhos", "Chuva de Poções", "Fórmula Secreta", "Visionário"] },
-        "Mercante": { bonus: "pv", skills: ["Data de Validade", "Já Ouvi Falar!", "Estoque Privado", "Tesouro Real", "Ventos do Comércio"] },
-        "Mutante": { bonus: "pv", skills: ["Akromorfose", "Biofagia", "Ecdise", "Genoclépsis", "Theriomorfose"] },
-        "Piloto": { bonus: "pv", skills: ["Compressão tecnológica", "Configuração flexível", "Coração no motor", "Veículo pessoal", "Agarre firme"] },
-        "Simbolista": { bonus: "pm", skills: ["Símbolos mágicos", "Miragem", "Toque pessoal", "Conexão simbólica", "Simbolismo"] },
-        "Necromante": { bonus: "pm", skills: ["Além dos Reinos da Morte", "Filhos da Sepultura", "O Medo é a Chave", "Para Quem Toca o Sino", "Rondo do Pesadelo"] }
-    };
+    const fields = [
+        'fName', 'fIdent', 'fTheme', 'fOrigin', 'fLevel',
+        'fDex', 'fIns', 'fMig', 'fWlp',
+        'fPV', 'fPM', 'fDef', 'fMDef',
+        'fClasses', 'fSkills', 'fEquip', 'fHistory', 'fNotes'
+    ];
 
-    let charClasses = [];
-
-    function addClass() {
-        charClasses.push({ name: "", level: 1, skills: {} });
-        renderClasses();
-    }
-
-    function removeClass(idx) {
-        charClasses.splice(idx, 1);
-        renderClasses();
-    }
-
-    function updateClassName(idx, name) {
-        charClasses[idx].name = name;
-        charClasses[idx].skills = {};
-        renderClasses();
-    }
-
-    function updateClassLevel(idx, level) {
-        charClasses[idx].level = parseInt(level) || 0;
-        renderClasses();
-    }
-
-    function updateSkillLevel(cIdx, skillName, sLevel) {
-        charClasses[cIdx].skills[skillName] = parseInt(sLevel) || 0;
-        renderClasses();
-    }
-
-    function renderClasses() {
-        const container = document.getElementById('classArea');
-        container.innerHTML = charClasses.map((c, i) => {
-            const classInfo = CLASS_DATA[c.name];
-            let skillsHTML = "";
-            let spentPoints = 0;
-            
-            if (classInfo) {
-                spentPoints = Object.values(c.skills).reduce((a, b) => a + b, 0);
-                skillsHTML = `
-                    <div style="margin-top:10px">
-                        <label>Habilidades (Gastar ${c.level} pontos):</label>
-                        ${classInfo.skills.map(s => {
-                            const val = c.skills[s] || 0;
-                            return `
-                                <div class="skill-row">
-                                    <label>${s}</label>
-                                    <select onchange="updateSkillLevel(${i}, '${s}', this.value)">
-                                        ${[0,1,2,3,4,5,6,7,8,9,10].map(v => `<option value="${v}" ${val == v ? 'selected' : ''}>SL ${v}</option>`).join('')}
-                                    </select>
-                                </div>
-                            `;
-                        }).join('')}
-                        <div class="${spentPoints === c.level ? 'success' : 'warning'}">
-                            Pontos gastos: ${spentPoints} / ${c.level}
-                            ${spentPoints !== c.level ? '<br>⚠️ Os pontos devem ser iguais ao nível da classe!' : ''}
-                        </div>
-                    </div>
-                `;
-            }
-
-            return `
-                <details open class="class-container">
-                    <summary>${c.name || "Nova Classe"} (Nível ${c.level})</summary>
-                    <div class="content">
-                        <div class="grid">
-                            <div>
-                                <label>Classe:</label>
-                                <select onchange="updateClassName(${i}, this.value)">
-                                    <option value="">-- Selecionar --</option>
-                                    ${Object.keys(CLASS_DATA).map(name => `<option value="${name}" ${c.name === name ? 'selected' : ''}>${name}</option>`).join('')}
-                                </select>
-                            </div>
-                            <div>
-                                <label>Nível da Classe:</label>
-                                <select onchange="updateClassLevel(${i}, this.value)">
-                                    ${[0,1,2,3,4,5,6,7,8,9,10].map(v => `<option value="${v}" ${c.level == v ? 'selected' : ''}>Nível ${v}</option>`).join('')}
-                                </select>
-                            </div>
-                        </div>
-                        ${skillsHTML}
-                        <button class="btn-remove" onclick="removeClass(${i})">Remover Classe</button>
-                    </div>
-                </details>
-            `;
-        }).join('');
-        calc();
-    }
-
-    function calc() {
-        const totalLvl = charClasses.reduce((sum, c) => sum + (c.level || 0), 0);
-        document.getElementById('vTotalLvl').innerText = totalLvl;
-        document.getElementById('totalLevelWarning').style.display = (totalLvl > 0 && totalLvl !== 5) ? 'block' : 'none';
-
-        const dex = parseInt(document.getElementById('fDex').value);
-        const ins = parseInt(document.getElementById('fIns').value);
-        const mig = parseInt(document.getElementById('fMig').value);
-        const wlp = parseInt(document.getElementById('fWlp').value);
-        
-        let hpBonus = 0;
-        let mpBonus = 0;
-
-        charClasses.forEach(c => {
-            if (c.name && CLASS_DATA[c.name]) {
-                if (CLASS_DATA[c.name].bonus === "pv") hpBonus += 5;
-                if (CLASS_DATA[c.name].bonus === "pm") mpBonus += 5;
-            }
+    function save() {
+        const data = {};
+        fields.forEach(id => {
+            data[id] = document.getElementById(id).value;
         });
-
-        document.getElementById('vPv').innerText = (mig * 5) + totalLvl + hpBonus;
-        document.getElementById('vPm').innerText = (wlp * 5) + totalLvl + mpBonus;
-        document.getElementById('vDef').innerText = dex;
-        document.getElementById('vMdef').innerText = ins;
+        localStorage.setItem('ficha_libre_data', JSON.stringify(data));
     }
 
-    function exportTXT() {
-        const n = document.getElementById('fName').value || "Heroi";
-        let txt = `FICHA DE PERSONAGEM - FABULA ULTIMA\n\n`;
-        txt += `Nome: ${n}\nIdentidade: ${document.getElementById('fIdent').value}\nTema: ${document.getElementById('fTheme').value}\nOrigem: ${document.getElementById('fOrigin').value}\n`;
-        txt += `Nível Total: ${document.getElementById('vTotalLvl').innerText}\n\nHISTÓRIA:\n${document.getElementById('fHistory').value}\n\n`;
-        txt += `CLASSES:\n`;
-        charClasses.forEach(c => {
-            txt += `- ${c.name} (Lvl ${c.level})\n`;
-            for(let s in c.skills) { if(c.skills[s] > 0) txt += `  * ${s}: SL ${c.skills[s]}\n`; }
+    function load() {
+        const raw = localStorage.getItem('ficha_libre_data');
+        if (raw) {
+            const data = JSON.parse(raw);
+            fields.forEach(id => {
+                if (data[id] !== undefined) {
+                    document.getElementById(id).value = data[id];
+                }
+            });
+        }
+    }
+
+    function downloadJSON() {
+        const data = {};
+        fields.forEach(id => {
+            data[id] = document.getElementById(id).value;
         });
-        txt += `\nATRIBUTOS:\nDEX d${document.getElementById('fDex').value} | INS d${document.getElementById('fIns').value}\nMIG d${document.getElementById('fMig').value} | WLP d${document.getElementById('fWlp').value}\n\nSTATUS:\nPV: ${document.getElementById('vPv').innerText} | PM: ${document.getElementById('vPm').innerText}\nDefesa: ${document.getElementById('vDef').innerText} | D.Mag: ${document.getElementById('vMdef').innerText}\n\nEQUIPAMENTOS:\n${document.getElementById('fEquip').value}\n\nNOTAS:\n${document.getElementById('fNotes').value}`;
-        
-        const blob = new Blob([txt], {type: 'text/plain'});
+        const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
         const a = document.createElement('a');
+        const name = document.getElementById('fName').value || 'Personagem';
         a.href = URL.createObjectURL(blob);
-        a.download = `Ficha_${n}.txt`;
+        a.download = `Ficha_${name.replace(/\s+/g, '_')}.json`;
         a.click();
     }
 
-    function exportJSON() {
-        const data = {
-            n: document.getElementById('fName').value,
-            id: document.getElementById('fIdent').value,
-            th: document.getElementById('fTheme').value,
-            og: document.getElementById('fOrigin').value,
-            hist: document.getElementById('fHistory').value,
-            desc: document.getElementById('fDesc').value,
-            stats: { d: document.getElementById('fDex').value, i: document.getElementById('fIns').value, m: document.getElementById('fMig').value, w: document.getElementById('fWlp').value },
-            classes: charClasses,
-            equip: document.getElementById('fEquip').value,
-            notes: document.getElementById('fNotes').value
-        };
-        const blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `Backup_Ficha_FU.json`;
-        a.click();
-    }
-
-    function importJSON(e) {
+    function uploadJSON(e) {
         const reader = new FileReader();
         reader.onload = (ev) => {
-            const d = JSON.parse(ev.target.result);
-            document.getElementById('fName').value = d.n || "";
-            document.getElementById('fIdent').value = d.id || "";
-            document.getElementById('fTheme').value = d.th || "";
-            document.getElementById('fOrigin').value = d.og || "";
-            document.getElementById('fHistory').value = d.hist || "";
-            document.getElementById('fDesc').value = d.desc || "";
-            document.getElementById('fDex').value = d.stats.d;
-            document.getElementById('fIns').value = d.stats.i;
-            document.getElementById('fMig').value = d.stats.m;
-            document.getElementById('fWlp').value = d.stats.w;
-            charClasses = d.classes || [];
-            document.getElementById('fEquip').value = d.equip || "";
-            document.getElementById('fNotes').value = d.notes || "";
-            renderClasses();
+            try {
+                const data = JSON.parse(ev.target.result);
+                fields.forEach(id => {
+                    if (data[id] !== undefined) {
+                        document.getElementById(id).value = data[id];
+                    }
+                });
+                save();
+                alert('Ficha carregada com sucesso!');
+            } catch (err) {
+                alert('Erro ao carregar o arquivo JSON.');
+            }
         };
         reader.readAsText(e.target.files[0]);
     }
 
-    window.onload = () => { calc(); };
+    function downloadTXT() {
+        const name = document.getElementById('fName').value || 'Herói';
+        let txt = `FICHA FÁBULA ÚLTIMA - EDICAO LIVRE\n`;
+        txt += `====================================\n\n`;
+        
+        txt += `NOME: ${document.getElementById('fName').value}\n`;
+        txt += `IDENTIDADE: ${document.getElementById('fIdent').value}\n`;
+        txt += `TEMA: ${document.getElementById('fTheme').value}\n`;
+        txt += `ORIGEM: ${document.getElementById('fOrigin').value}\n`;
+        txt += `NÍVEL: ${document.getElementById('fLevel').value}\n\n`;
+        
+        txt += `ATRIBUTOS:\n`;
+        txt += `DEX: ${document.getElementById('fDex').value} | INS: ${document.getElementById('fIns').value}\n`;
+        txt += `MIG: ${document.getElementById('fMig').value} | WLP: ${document.getElementById('fWlp').value}\n\n`;
+        
+        txt += `STATUS:\n`;
+        txt += `PV: ${document.getElementById('fPV').value} | PM: ${document.getElementById('fPM').value}\n`;
+        txt += `DEFESA: ${document.getElementById('fDef').value} | DEF. MÁGICA: ${document.getElementById('fMDef').value}\n\n`;
+        
+        txt += `CLASSES E HABILIDADES:\n`;
+        txt += `${document.getElementById('fClasses').value}\n\n`;
+        txt += `DETALHES DAS HABILIDADES:\n`;
+        txt += `${document.getElementById('fSkills').value}\n\n`;
+        
+        txt += `INVENTÁRIO:\n`;
+        txt += `${document.getElementById('fEquip').value}\n\n`;
+        
+        txt += `HISTÓRIA:\n`;
+        txt += `${document.getElementById('fHistory').value}\n\n`;
+        
+        txt += `NOTAS:\n`;
+        txt += `${document.getElementById('fNotes').value}\n`;
+
+        const blob = new Blob([txt], {type: 'text/plain'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `Ficha_${name.replace(/\s+/g, '_')}.txt`;
+        a.click();
+    }
+
+    window.onload = load;
 </script>
+
 </body>
 </html>
