@@ -116,33 +116,38 @@
 </main>
 
 <script>
-    const CLASS_DATA = {
-        "Arcanista": { bonus: "pm", skills: ["Afinidade Arcana", "Invocação de Arcanum", "Ritualismo Arcano", "Transferência de PM"] },
-        "Atirador": { bonus: "pv", skills: ["Artilharia", "Mira", "Recarga Rápida", "Tiro de Aviso"] },
-        "Cantor (Chantre)": { bonus: "pm", skills: ["Canções", "Magia Musical", "Voz de Trovão", "Melodia Curativa"] },
-        "Comandante": { bonus: "pv", skills: ["Grito de Guerra", "Liderança", "Táticas de Grupo", "Ordem de Ataque"] },
-        "Dançarino": { bonus: "pv", skills: ["Dança de Combate", "Elegância", "Esquiva", "Passo de Dança"] },
-        "Elementalista": { bonus: "pm", skills: ["Artilharia Mágica", "Magia Elemental", "Ritual Elementalista", "Espada Mágica"] },
-        "Engenhoqueiro (Inventor)": { bonus: "pv", skills: ["Aparelhos", "Criação de Itens", "Upgrade", "Alquimia"] },
-        "Engenhoca (Techno)": { bonus: "pv", skills: ["Gadgets", "Braço Mecânico", "Sobrecarga", "Interface Neural"] },
-        "Entropista": { bonus: "pm", skills: ["Magia Entrópica", "Ritual Entrópico", "Sorte do Caos", "Visão do Futuro"] },
-        "Espiritista": { bonus: "pm", skills: ["Magia Espiritual", "Ritual Espiritual", "Aura de Cura", "Barreira Mágica"] },
-        "Florista (Floralista)": { bonus: "pm", skills: ["Crescimento Rápido", "Toxinas Naturais", "Esporos", "Jardim Mágico"] },
-        "Gastrônomo (Gourmet)": { bonus: "pv", skills: ["Culinária", "Ingredientes", "Receitas", "Banquete"] },
-        "Guardião": { bonus: "pv", skills: ["Proteger", "Fortaleza", "Defesa Pesada", "Provocar"] },
-        "Invocador": { bonus: "pm", skills: ["Invocação Espiritual", "Pacto com Natureza", "Elo Elemental", "Chamado"] },
-        "Ladino": { bonus: "pv", skills: ["Ataque Furtivo", "Esquiva", "Gazuas", "Agilidade"] },
-        "Lâmina Sombria": { bonus: "pv", skills: ["Golpe Sombrio", "Coração de Trevas", "Lâmina Maldita", "Sacrifício"] },
-        "Mestre de Armas": { bonus: "pv", skills: ["Ataque Poderoso", "Fúria", "Provocação", "Resistência Física"] },
-        "Mutante": { bonus: "pv", skills: ["Mutação", "Adaptação", "Regeneração", "Evolução"] },
-        "Orador": { bonus: "pm", skills: ["Diplomacia", "Persuasão", "Inspirar", "Negociação"] },
-        "Piloto": { bonus: "pv", skills: ["Veículo Pessoal", "Manobras", "Reparo em Combate", "Interface"] },
-        "Quimerista": { bonus: "pm", skills: ["Magia Quimérica", "Mimetismo", "Olhar Predador", "Ritual Quimérico"] },
-        "Sábio (Mestre do Conhecimento)": { bonus: "pm", skills: ["Análise", "Flash de Intuição", "Memória Treinada", "Conhecimento é Poder"] },
-        "Simbolista": { bonus: "pm", skills: ["Símbolos de Poder", "Escrita Mágica", "Runas", "Proteção Simbólica"] },
-        "Viajante (Andarilho)": { bonus: "pv", skills: ["Amigo Animal", "Explorador", "Sobrevivente", "Fogo de Acampamento"] },
-        "Necromante": { bonus: "pm", skills: ["Sussurros da Morte", "Servo Esquelético", "Dreno de Vida", "Ritual de Ossos"] }
-    };
+const CLASS_DATA = {
+    "Arcanista": { bonus: "pm", skills: ["Regeneração Arcana", "Vincular e Invocar", "Força Fantasma", "Invocação Rápida", "Ritual Arcanista"] },
+    "Atirador": { bonus: "pv", skills: ["Rajada", "Fogo Cruzado", "Olho de Águia", "Mestria em Armas à Distância", "Tiro de Advertência"] },
+    "Chantre": { bonus: "pm", skills: ["Magicanção", "Ressonância", "Canção da sereia", "Barreira sonora", "Vibrato"] },
+    "Comandante": { bonus: "pv", skills: ["Édito do Bispo", "Cavalaria de Choque", "Carroça Esmagadora", "Castelo do Rei", "Gambito da Rainha"] },
+    "Dançarino": { bonus: "pv", skills: ["Dança", "Siga meu Passo", "Passos Frenéticos", "Troca Rápida", "Dançarino de Guerra"] },
+    "Domador": { bonus: "pv", skills: ["Ataque Total", "Hibridização", "Interceptador", "Negociar", "Libertar"] },
+    "Elementalista": { bonus: "pm", skills: ["Cataclismo", "Magia Elemental", "Artilharia Mágica", "Ritual Elementalista", "Espada Mágica"] },
+    "Engenhoqueiro": { bonus: "pv", skills: ["Item de Emergência", "Aparelhos", "Chuva de Poções", "Fórmula Secreta", "Visionário"] },
+    "Engenhoca": { bonus: "pv", skills: ["Armamento Magitec", "Magiesferas", "Infusões", "Engenhoca Tática", "Reciclagem"] },
+    "Entropista": { bonus: "pm", skills: ["Absorver PM", "Magia Entrópica", "Sete da Sorte", "Ritual Entrópico", "Tempo Roubado"] },
+    "Esper": { bonus: "pm", skills: ["Foco Cognitivo", "Hipercognição", "Navegador", "Dons Psíquicos", "Psicocinese"] },
+    "Espiritista": { bonus: "pm", skills: ["Poder de Cura", "Ritualismo Espiritista", "Magia Espiritual", "Magia de Suporte", "Vismago"] },
+    "Florista": { bonus: "pm", skills: ["Jardinagem de Batalha", "Cloromancia", "Crescimento", "Nuvem de Esporos", "Espinhos"] },
+    "Fúria": { bonus: "pv", skills: ["Adrenalina", "Frenesi", "Espírito Indomável", "Provocar", "Resistir"] },
+    "Gastrônomo": { bonus: "pv", skills: ["Culinária", "Faca e Garfo", "Feito com Amor", "Sal e Pimenta", "Cozinheiro Andarilho"] },
+    "Guardião": { bonus: "pv", skills: ["Retaliação", "Mestria Defensiva", "Portador de dois Escudos", "Fortaleza", "Proteger"] },
+    "Invocador": { bonus: "pm", skills: ["Harmonia Elemental", "Invocação", "Invocação Vinculada", "Ondulações", "Expansão da Fonte"] },
+    "Ladino": { bonus: "pv", skills: ["Golpe Baixo", "Esquiva", "Alta Velocidade", "Até Mais", "Roubo de Alma"] },
+    "Lâmina Sombria": { bonus: "pv", skills: ["Agonia", "Sangue Sombrio", "Coração das Trevas", "Lição Dolorosa", "Golpe Sombrio"] },
+    "Mercante": { bonus: "pv", skills: ["Data de Validade", "Já Ouvi Falar!", "Estoque Privado", "Tesouro Real", "Ventos do Comércio"] },
+    "Mestre de Armas": { bonus: "pv", skills: ["Tempestade de Lâminas", "Triturador de Ossos", "Ruptura", "Contra-ataque", "Mestria em Armas Corpo a Corpo"] },
+    "Mutante": { bonus: "pv", skills: ["Akromorfose", "Biofagia", "Ecdise", "Genoclépsis", "Theriomorfose"] },
+    "Necromante": { bonus: "pm", skills: ["Além dos Reinos da Morte", "Filhos da Sepultura", "O Medo é a Chave", "Para Quem Toca o Sino", "Rondo do Pesadelo"] },
+    "Orador": { bonus: "pm", skills: ["Condenar", "Encorajar", "Minha Confiança em Você", "Persuasivo", "Aliado Inesperado"] },
+    "Piloto": { bonus: "pv", skills: ["Compressão Tecnológica", "Configuração Flexível", "Coração no Motor", "Veículo Pessoal", "Agarre Firme"] },
+    "Quimerista": { bonus: "pm", skills: ["Consumir", "Fala Bestial", "Patogênese", "Ritual Quimerista", "Imitar Magia"] },
+    "Sábio": { bonus: "pm", skills: ["Flash de Intuição", "Focado", "Conhecimento é Poder", "Avaliação Rápida", "Memória Treinada"] },
+    "Simbolista": { bonus: "pm", skills: ["Símbolos Mágicos", "Miragem", "Toque Pessoal", "Conexão Simbólica", "Simbolismo"] },
+    "Viajante": { bonus: "pv", skills: ["Companheiro Fiel", "Astuto", "Conversa de Taverna", "Caçador de Tesouros", "Bem Viajado"] }
+};
+
 
     let selectedClasses = [ {name: "", level: 0}, {name: "", level: 0}, {name: "", level: 0} ];
     let chosenSkills = [];
@@ -157,7 +162,9 @@
                     ${Object.keys(CLASS_DATA).map(name => `<option value="${name}" ${c.name === name ? 'selected' : ''}>${name}</option>`).join('')}
                 </select>
                 <label style="margin-left:10px">Nível:</label>
-                <input type="number" value="${c.level}" min="0" max="5" style="width:60px; display:inline" onchange="updateLevel(${i}, this.value)">
+                <select style="width:80px; display:inline" onchange="updateLevel(${i}, this.value)">
+                    ${[0,1,2,3,4,5].map(v => `<option value="${v}" ${c.level == v ? 'selected' : ''}>${v}</option>`).join('')}
+                </select>
             </div>
         `).join('');
         updateSkillsUI();
@@ -218,7 +225,9 @@
                 <strong>${s.name} (${s.className})</strong>
                 <div style="display:flex; align-items:center; gap:10px; margin-top:5px">
                     <label>Nível (SL):</label>
-                    <input type="number" value="${s.sl}" min="1" max="10" style="width:60px" onchange="chosenSkills[${i}].sl = this.value">
+                    <select style="width:80px" onchange="chosenSkills[${i}].sl = this.value">
+                        ${[1,2,3,4,5,6,7,8,9,10].map(v => `<option value="${v}" ${s.sl == v ? 'selected' : ''}>${v}</option>`).join('')}
+                    </select>
                     <button class="btn-remove" onclick="chosenSkills.splice(${i},1); renderChosenSkills()">Remover</button>
                 </div>
             </div>
